@@ -2,4 +2,5 @@
 
 ## TODO
 
-1. Add on input events
+1. Handle rendering depth
+2. Add on input events
