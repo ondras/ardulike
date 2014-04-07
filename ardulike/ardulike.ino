@@ -13,6 +13,8 @@ Level lvl = Level();
 
 Character player   = Character('@', 0, 0, 5, 3);
 Character ogre     = Character('O', 0, 2, 5, 2);
+Character orc      = Character('o', 1, 10, 3, 1);
+Character dog      = Character('d', 1, 2 , 1, 1);
 
 Stairs stairs_down = Stairs('>', 0, 25, 1, 6);
 Stairs stairs_up   = Stairs('<', 1, 6,  0, 25);
@@ -20,7 +22,8 @@ Stairs stairs_up   = Stairs('<', 1, 6,  0, 25);
 Screen screen(lcd);
 
 void setup(void) {
-  screen.render(lvl, player, ogre, stairs_up, stairs_down);
+  lvl.addActors(6, &player, &ogre, &stairs_up, &stairs_down, &orc, &dog);
+  screen.render(player, lvl);
 }
 
 void loop(void) {
@@ -63,6 +66,6 @@ void loop(void) {
   }
 
   if (oldpos != pos || oldl != l) {
-    screen.render(lvl, player, ogre, stairs_up, stairs_down);
+    screen.render(player, lvl);
   }
 }

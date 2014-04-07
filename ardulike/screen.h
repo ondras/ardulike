@@ -13,7 +13,7 @@ private:
   LiquidCrystal lcd;
 public:
   Screen(LiquidCrystal _lcd);
-  void render(Level lvl, Character player, Character ogre, Stairs stairs_up, Stairs stairs_down);
+  void render(Character player, Level lvl);
 };
 
 #endif
