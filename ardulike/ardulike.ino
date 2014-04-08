@@ -11,18 +11,21 @@ LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 
 Level lvl = Level();
 
-Character player   = Character('@', 0, 0, 5, 3);
-Character ogre     = Character('O', 0, 2, 5, 2);
-Character orc      = Character('o', 1, 10, 3, 1);
-Character dog      = Character('d', 1, 2 , 1, 1);
+Character player   = Character('@', 2, 0, 0, 5, 3);
+Character ogre     = Character('O', 1, 0, 2, 5, 2);
+Character orc      = Character('o', 1, 1, 10, 3, 1);
+Character dog      = Character('d', 1, 1, 2 , 1, 1);
 
-Stairs stairs_down = Stairs('>', 0, 25, 1, 6);
-Stairs stairs_up   = Stairs('<', 1, 6,  0, 25);
+Stairs stairs_down = Stairs('>', 0, 0, 25, 1, 6);
+Stairs stairs_up   = Stairs('<', 0, 1, 6,  0, 25);
+
+Entity tree        = Entity('T', 0, 0, 8);
+Entity wall        = Entity('#', 4, 0, 21);
 
 Screen screen(lcd);
 
 void setup(void) {
-  lvl.addActors(6, &player, &ogre, &stairs_up, &stairs_down, &orc, &dog);
+  lvl.addActors(8, &player, &ogre, &stairs_up, &stairs_down, &orc, &dog, &wall, &tree);
   screen.render(player, lvl);
 }
 

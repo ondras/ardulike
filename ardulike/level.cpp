@@ -38,18 +38,21 @@ char * Level::getLevelView(uint8_t level, uint8_t view_index)
   uint8_t from = view_index * SCREEN_COLS;
   uint8_t to   = (view_index + 1) * SCREEN_COLS;
   uint8_t pos, lvl;
-  char    rep;
 
   memset(level_view, '.', SCREEN_COLS);
 
-  for (uint8_t i = 0; i < actor_count; i++) {
-    actor = actors[i];
-    lvl   = actor->getLevel();
-    pos   = actor->getPosition();
-    rep   = actor->getRepresentation();
+  for (uint8_t depth = 0; depth < SCREEN_DEPTH; depth++) {
+    for (uint8_t i = 0; i < actor_count; i++) {
+      actor = actors[i];
 
-    if (lvl == level && pos >= from && pos < to) {
-      level_view[pos % SCREEN_COLS] = rep;
+      if (actor->getDisplayDepth() != depth) { continue; }
+
+      lvl   = actor->getLevel();
+      pos   = actor->getPosition();
+
+      if (lvl != level || pos < from || pos >= to) { continue; }
+
+      level_view[pos % SCREEN_COLS] = actor->getRepresentation();
     }
   }
 

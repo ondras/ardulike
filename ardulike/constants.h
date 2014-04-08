@@ -14,5 +14,6 @@
 
 #define SCREEN_ROWS   2
 #define SCREEN_COLS  16
+#define SCREEN_DEPTH  8  // 'z' axis
 
 #endif

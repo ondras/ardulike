@@ -44,7 +44,7 @@ bool Character::attack(Character * other)
   }
 }
 
-Character::Character(char _representation, uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness):
-Entity(_representation, _level, _position), hp(_hp), toughness(_toughness), alive(1)
+Character::Character(char _representation, uint8_t _display_depth, uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness):
+Entity(_representation, _display_depth, _level, _position), hp(_hp), toughness(_toughness), alive(1)
 {
 }
