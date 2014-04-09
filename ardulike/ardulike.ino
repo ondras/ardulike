@@ -1,7 +1,7 @@
 #include <avr/pgmspace.h>
 #include <Wire.h>
 
-#include "level.h"
+#include "world.h"
 #include "input.h"
 #include "character.h"
 #include "screen.h"
@@ -9,7 +9,7 @@
 
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 
-Level lvl = Level();
+World w = World();
 
 Character player   = Character('@', 2, 0, 0, 5, 3);
 Character ogre     = Character('O', 1, 0, 2, 5, 2);
@@ -25,8 +25,8 @@ Entity wall        = Entity('#', 4, 0, 21);
 Screen screen(lcd);
 
 void setup(void) {
-  lvl.addActors(8, &player, &ogre, &stairs_up, &stairs_down, &orc, &dog, &wall, &tree);
-  screen.render(player, lvl);
+  w.addActors(8, &player, &ogre, &stairs_up, &stairs_down, &orc, &dog, &wall, &tree);
+  screen.render(player, w);
 }
 
 void loop(void) {
@@ -53,11 +53,11 @@ void loop(void) {
   } else
 
   if (input == BUTTON_LEFT) {
-    pos == 0 ? pos = lvl.getLevelSize(l) - 1 : pos--;
+    pos == 0 ? pos = w.getSize(l) - 1 : pos--;
   } else
 
   if (input == BUTTON_RIGHT) {
-    pos == lvl.getLevelSize(l) - 1 ? pos = 0 : pos++;
+    pos == w.getSize(l) - 1 ? pos = 0 : pos++;
   }
 
   if (l == ogre.getLevel() && pos == ogre.getPosition() && ogre.isAlive()) {
@@ -69,6 +69,6 @@ void loop(void) {
   }
 
   if (oldpos != pos || oldl != l) {
-    screen.render(player, lvl);
+    screen.render(player, w);
   }
 }

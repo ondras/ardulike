@@ -5,7 +5,7 @@
 
 #include "constants.h"
 #include "character.h"
-#include "level.h"
+#include "world.h"
 #include "stairs.h"
 
 class Screen {
@@ -13,7 +13,7 @@ private:
   LiquidCrystal lcd;
 public:
   Screen(LiquidCrystal _lcd);
-  void render(Character player, Level lvl);
+  void render(Character player, World w);
 };
 
 #endif

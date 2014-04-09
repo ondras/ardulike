@@ -2,19 +2,19 @@
 #include <avr/io.h>
 #include <stdarg.h>
 #include <stdio.h>
-#include "level.h"
+#include "world.h"
 
-Level::Level(void):
+World::World(void):
   actor_count(0), size(128)
 {
 }
 
-void Level::addActor(Entity * actor)
+void World::addActor(Entity * actor)
 {
   actors[actor_count++] = actor;
 }
 
-void Level::addActors(int count, ...)
+void World::addActors(int count, ...)
 {
   va_list arguments;
   va_start(arguments, count);
@@ -26,12 +26,12 @@ void Level::addActors(int count, ...)
   va_end(arguments);
 }
 
-uint8_t Level::getLevelSize(uint8_t level)
+uint8_t World::getSize(uint8_t level)
 {
   return size;
 }
 
-char * Level::getLevelView(uint8_t level, uint8_t view_index)
+char * World::getView(uint8_t level, uint8_t view_index)
 {
   Entity * actor;
 
@@ -39,7 +39,7 @@ char * Level::getLevelView(uint8_t level, uint8_t view_index)
   uint8_t to   = (view_index + 1) * SCREEN_COLS;
   uint8_t pos, lvl;
 
-  memset(level_view, '.', SCREEN_COLS);
+  memset(view, '.', SCREEN_COLS);
 
   for (uint8_t depth = 0; depth < SCREEN_DEPTH; depth++) {
     for (uint8_t i = 0; i < actor_count; i++) {
@@ -52,15 +52,15 @@ char * Level::getLevelView(uint8_t level, uint8_t view_index)
 
       if (lvl != level || pos < from || pos >= to) { continue; }
 
-      level_view[pos % SCREEN_COLS] = actor->getRepresentation();
+      view[pos % SCREEN_COLS] = actor->getRepresentation();
     }
   }
 
-  level_view[SCREEN_COLS] = '\0';
-  return level_view;
+  view[SCREEN_COLS] = '\0';
+  return view;
 }
 
-uint8_t Level::getActorCount(void)
+uint8_t World::getActorCount(void)
 {
   return actor_count;
 }
