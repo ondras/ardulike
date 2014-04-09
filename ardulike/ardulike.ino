@@ -25,7 +25,7 @@ Entity wall        = Entity('#', 4, 0, 21);
 Screen screen(lcd);
 
 void setup(void) {
-  w.addActors(8, &player, &ogre, &stairs_up, &stairs_down, &orc, &dog, &wall, &tree);
+  w.addEntities(8, &player, &ogre, &stairs_up, &stairs_down, &orc, &dog, &wall, &tree);
   screen.render(player, w);
 }
 

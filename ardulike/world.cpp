@@ -5,22 +5,22 @@
 #include "world.h"
 
 World::World(void):
-  actor_count(0), size(128)
+  entity_count(0), size(128)
 {
 }
 
-void World::addActor(Entity * actor)
+void World::addEntity(Entity * entity)
 {
-  actors[actor_count++] = actor;
+  entities[entity_count++] = entity;
 }
 
-void World::addActors(int count, ...)
+void World::addEntities(int count, ...)
 {
   va_list arguments;
   va_start(arguments, count);
 
   for (uint8_t i = 0; i < count; i++) {
-    addActor(va_arg(arguments, Entity *));
+    addEntity(va_arg(arguments, Entity *));
   }
 
   va_end(arguments);
@@ -33,7 +33,7 @@ uint8_t World::getSize(uint8_t level)
 
 char * World::getView(uint8_t level, uint8_t view_index)
 {
-  Entity * actor;
+  Entity * e;
 
   uint8_t from = view_index * SCREEN_COLS;
   uint8_t to   = (view_index + 1) * SCREEN_COLS;
@@ -42,17 +42,17 @@ char * World::getView(uint8_t level, uint8_t view_index)
   memset(view, '.', SCREEN_COLS);
 
   for (uint8_t depth = 0; depth < SCREEN_DEPTH; depth++) {
-    for (uint8_t i = 0; i < actor_count; i++) {
-      actor = actors[i];
+    for (uint8_t i = 0; i < entity_count; i++) {
+      e = entities[i];
 
-      if (actor->getDisplayDepth() != depth) { continue; }
+      if (e->getDisplayDepth() != depth) { continue; }
 
-      lvl   = actor->getLevel();
-      pos   = actor->getPosition();
+      lvl   = e->getLevel();
+      pos   = e->getPosition();
 
       if (lvl != level || pos < from || pos >= to) { continue; }
 
-      view[pos % SCREEN_COLS] = actor->getRepresentation();
+      view[pos % SCREEN_COLS] = e->getRepresentation();
     }
   }
 
@@ -60,7 +60,7 @@ char * World::getView(uint8_t level, uint8_t view_index)
   return view;
 }
 
-uint8_t World::getActorCount(void)
+uint8_t World::getEntityCount(void)
 {
-  return actor_count;
+  return entity_count;
 }

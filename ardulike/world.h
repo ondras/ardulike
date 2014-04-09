@@ -6,18 +6,18 @@
 
 class World {
 private:
-  Entity * actors[64];
-  uint8_t  actor_count;
+  Entity * entities[64];
+  uint8_t  entity_count;
   uint8_t  size;
   char view[SCREEN_COLS + 1];
 public:
   World(void);
 
-  void    addActor(Entity * actor);
-  void    addActors(int count, ...);
+  void    addEntity(Entity * entity);
+  void    addEntities(int count, ...);
   char *  getView(uint8_t level, uint8_t view_index);
   uint8_t getSize(uint8_t level);
-  uint8_t getActorCount(void);
+  uint8_t getEntityCount(void);
 };
 
 #endif
