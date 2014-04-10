@@ -13,7 +13,7 @@ private:
   LiquidCrystal lcd;
 public:
   Screen(LiquidCrystal _lcd);
-  void render(Character player, World w);
+  void render(World * w);
 };
 
 #endif

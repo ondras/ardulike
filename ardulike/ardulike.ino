@@ -27,7 +27,7 @@ Screen screen(lcd);
 void setup(void) {
   w.addPlayer(&player);
   w.addEntities(8, &player, &ogre, &stairs_up, &stairs_down, &orc, &dog, &wall, &tree);
-  screen.render(player, w);
+  screen.render(&w);
 }
 
 void loop(void) {
@@ -70,6 +70,6 @@ void loop(void) {
   }
 
   if (oldpos != pos || oldl != l) {
-    screen.render(player, w);
+    screen.render(&w);
   }
 }

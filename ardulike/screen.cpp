@@ -6,16 +6,16 @@ Screen::Screen(LiquidCrystal _lcd):
   lcd.begin(SCREEN_COLS, SCREEN_ROWS);
 }
 
-void Screen::render(Character player, World w)
+void Screen::render(World * w)
 {
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("L:");
-  lcd.print(player.getLevel());
+  lcd.print(w->getPlayer()->getLevel());
   lcd.print("H:");
-  lcd.print(player.getHp());
+  lcd.print(w->getPlayer()->getHp());
   lcd.setCursor(0, 1);
 
-  lcd.print(w.getView(player.getLevel(), player.getPosition() / SCREEN_COLS));
+  lcd.print(w.getView(w->getPlayer()->getLevel(), w->getPlayer()->getPosition() / SCREEN_COLS));
 }
 
