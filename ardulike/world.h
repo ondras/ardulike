@@ -3,15 +3,20 @@
 
 #include "entity.h"
 #include "constants.h"
+#include "character.h"
 
 class World {
 private:
-  Entity * entities[64];
+  Character * player;
+  Entity    * entities[64];
   uint8_t  entity_count;
   uint8_t  size;
   char view[SCREEN_COLS + 1];
 public:
   World(void);
+
+  void        addPlayer(Character * _player);
+  Character * getPlayer(void);
 
   void    addEntity(Entity * entity);
   void    addEntities(int count, ...);

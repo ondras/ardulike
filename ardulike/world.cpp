@@ -64,3 +64,13 @@ uint8_t World::getEntityCount(void)
 {
   return entity_count;
 }
+
+void World::addPlayer(Character * _player)
+{
+  player = _player;
+}
+
+Character * World::getPlayer(void)
+{
+  return player;
+}
