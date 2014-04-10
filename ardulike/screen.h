@@ -12,7 +12,7 @@ class Screen {
 private:
   LiquidCrystal lcd;
 public:
-  Screen(LiquidCrystal _lcd);
+  Screen();
   void render(World * w);
 };
 

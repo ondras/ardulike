@@ -7,8 +7,6 @@
 #include "screen.h"
 #include "stairs.h"
 
-LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
-
 World w = World();
 
 Character player   = Character('@', 2, 0, 0, 5, 3);
@@ -22,7 +20,7 @@ Stairs stairs_up   = Stairs('<', 0, 1, 6,  0, 25);
 Entity tree        = Entity('T', 0, 0, 8);
 Entity wall        = Entity('#', 4, 0, 21);
 
-Screen screen(lcd);
+Screen screen = Screen();
 
 void setup(void) {
   w.addPlayer(&player);

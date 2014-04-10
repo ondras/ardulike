@@ -1,7 +1,7 @@
 #include "screen.h"
 
-Screen::Screen(LiquidCrystal _lcd):
-  lcd(_lcd)
+Screen::Screen():
+  lcd(8, 9, 4, 5, 6, 7)
 {
   lcd.begin(SCREEN_COLS, SCREEN_ROWS);
 }
