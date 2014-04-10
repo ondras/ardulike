@@ -54,11 +54,11 @@ void loop(void) {
   } else
 
   if (input == BUTTON_LEFT) {
-    pos == 0 ? pos = w.getSize(l) - 1 : pos--;
+    pos == 0 ? pos = w.getSize() - 1 : pos--;
   } else
 
   if (input == BUTTON_RIGHT) {
-    pos == w.getSize(l) - 1 ? pos = 0 : pos++;
+    pos == w.getSize() - 1 ? pos = 0 : pos++;
   }
 
   if (l == ogre.getLevel() && pos == ogre.getPosition() && ogre.isAlive()) {

@@ -26,17 +26,18 @@ void World::addEntities(int count, ...)
   va_end(arguments);
 }
 
-uint8_t World::getSize(uint8_t level)
+uint8_t World::getSize(void)
 {
   return size;
 }
 
-char * World::getView(uint8_t level, uint8_t view_index)
+char * World::getView(void)
 {
   Entity * e;
 
-  uint8_t from = view_index * SCREEN_COLS;
-  uint8_t to   = (view_index + 1) * SCREEN_COLS;
+  uint8_t from  = (player->getPosition() / SCREEN_COLS) * SCREEN_COLS;
+  uint8_t to    = (player->getPosition() / SCREEN_COLS + 1) * SCREEN_COLS;
+  uint8_t level = player->getLevel();
   uint8_t pos, lvl;
 
   memset(view, '.', SCREEN_COLS);

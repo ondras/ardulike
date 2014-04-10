@@ -20,8 +20,9 @@ public:
 
   void    addEntity(Entity * entity);
   void    addEntities(int count, ...);
-  char *  getView(uint8_t level, uint8_t view_index);
-  uint8_t getSize(uint8_t level);
+
+  char *  getView(void);
+  uint8_t getSize(void);
   uint8_t getEntityCount(void);
 };
 
