@@ -67,6 +67,8 @@ void loop(void) {
     player.setPosition(pos);
   }
 
+  w.onInput(input);
+
   if (oldpos != pos || oldl != l) {
     screen.render(&w);
   }

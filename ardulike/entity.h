@@ -3,6 +3,8 @@
 
 #include <Arduino.h>
 
+class World;
+
 class Entity {
 protected:
   uint8_t display_depth;
@@ -19,5 +21,7 @@ public:
   uint8_t getDisplayDepth(void);
   uint8_t getPosition(void);
   uint8_t getLevel(void);
+
+  bool onInput(uint8_t input, World * w);
 };
 #endif

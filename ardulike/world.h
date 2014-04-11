@@ -1,9 +1,10 @@
 #ifndef __ARDULIKE_WORLD_H__
 #define __ARDULIKE_WORLD_H__
 
-#include "entity.h"
 #include "constants.h"
-#include "character.h"
+
+class Character;
+class Entity;
 
 class World {
 private:
@@ -24,6 +25,8 @@ public:
   char *  getView(void);
   uint8_t getSize(void);
   uint8_t getEntityCount(void);
+
+  void    onInput(uint8_t input);
 };
 
 #endif

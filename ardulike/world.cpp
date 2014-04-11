@@ -2,7 +2,10 @@
 #include <avr/io.h>
 #include <stdarg.h>
 #include <stdio.h>
+
 #include "world.h"
+#include "character.h"
+#include "entity.h"
 
 World::World(void):
   entity_count(0), size(128)
@@ -74,4 +77,14 @@ void World::addPlayer(Character * _player)
 Character * World::getPlayer(void)
 {
   return player;
+}
+
+void World::onInput(uint8_t input)
+{
+  bool bubble = true;
+
+  for (uint8_t i = 0; i < entity_count; i++) {
+    bubble = entities[i]->onInput(input, this);
+    if (!bubble) { break; }
+  }
 }
