@@ -3,8 +3,8 @@
 
 #include "world.h"
 #include "input.h"
-#include "character.h"
-#include  "player.h"
+#include "npc.h"
+#include "player.h"
 #include "screen.h"
 #include "stairs.h"
 
@@ -12,9 +12,9 @@ World w = World();
 
 Player   player    = Player('@', 2, 0, 0, 5, 3);
 
-Character ogre     = Character('O', 1, 0, 2, 5, 2);
-Character orc      = Character('o', 1, 1, 10, 3, 1);
-Character dog      = Character('d', 1, 1, 2 , 1, 1);
+Npc ogre     = Npc('O', 1, 0, 2, 5, 2, true);
+Npc orc      = Npc('o', 1, 1, 10, 3, 1, true);
+Npc dog      = Npc('d', 1, 1, 2 , 1, 1, false);
 
 Stairs stairs_down = Stairs('>', 0, 0, 25, 1, 6);
 Stairs stairs_up   = Stairs('<', 0, 1, 6,  0, 25);
