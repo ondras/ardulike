@@ -29,47 +29,9 @@ void setup(void) {
 }
 
 void loop(void) {
-  uint8_t input     = Input::get();
-
-  uint8_t pos       = player.getPosition();
-  uint8_t l         = player.getLevel();
-
-  uint8_t oldpos    = player.getPosition();
-  uint8_t oldl      = player.getLevel();
-
-  if (input == BUTTON_UP) {
-    if (pos == stairs_up.getPosition() && l == stairs_up.getLevel()) {
-      l   = stairs_up.getTargetLevel();
-      pos = stairs_up.getTargetPosition();
-    }
-  } else
-
-  if (input == BUTTON_DOWN) {
-    if (pos == stairs_down.getPosition() && l == stairs_down.getLevel()) {
-      l   = stairs_down.getTargetLevel();
-      pos = stairs_down.getTargetPosition();
-    }
-  } else
-
-  if (input == BUTTON_LEFT) {
-    pos == 0 ? pos = w.getSize() - 1 : pos--;
-  } else
-
-  if (input == BUTTON_RIGHT) {
-    pos == w.getSize() - 1 ? pos = 0 : pos++;
-  }
-
-  if (l == ogre.getLevel() && pos == ogre.getPosition() && ogre.isAlive()) {
-    player.attack(&ogre);
-  }
-  else {
-    player.setLevel(l);
-    player.setPosition(pos);
-  }
+  uint8_t input = Input::get();
 
   w.onInput(input);
 
-  if (oldpos != pos || oldl != l) {
-    screen.render(&w);
-  }
+  screen.render(&w);
 }

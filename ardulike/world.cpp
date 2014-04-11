@@ -8,7 +8,7 @@
 #include "entity.h"
 
 World::World(void):
-  entity_count(0), size(128)
+  entity_count(0), size(128), changed(true)
 {
 }
 
@@ -81,10 +81,16 @@ Character * World::getPlayer(void)
 
 void World::onInput(uint8_t input)
 {
-  bool bubble = true;
+  changed = false;
+
+  if (input == BUTTON_NONE) { return; }
 
   for (uint8_t i = 0; i < entity_count; i++) {
-    bubble = entities[i]->onInput(input, this);
-    if (!bubble) { break; }
+    changed |= entities[i]->onInput(input, this);
   }
+}
+
+bool World::hasChanged(void)
+{
+  return changed;
 }

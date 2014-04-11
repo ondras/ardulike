@@ -13,6 +13,7 @@ private:
   uint8_t  entity_count;
   uint8_t  size;
   char view[SCREEN_COLS + 1];
+  bool changed;
 public:
   World(void);
 
@@ -26,6 +27,7 @@ public:
   uint8_t getSize(void);
   uint8_t getEntityCount(void);
 
+  bool    hasChanged(void);
   void    onInput(uint8_t input);
 };
 

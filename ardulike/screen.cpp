@@ -8,6 +8,8 @@ Screen::Screen():
 
 void Screen::render(World * w)
 {
+  if (!w->hasChanged()) { return; }
+
   Character * player = w->getPlayer();
 
   lcd.clear();
@@ -20,4 +22,3 @@ void Screen::render(World * w)
 
   lcd.print(w->getView());
 }
-

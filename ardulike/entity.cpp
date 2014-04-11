@@ -38,5 +38,5 @@ uint8_t Entity::getPosition(void)
 
 bool Entity::onInput(uint8_t input, World * w)
 {
-  return true;
+  return false;
 }

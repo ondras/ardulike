@@ -22,6 +22,6 @@ public:
   uint8_t getPosition(void);
   uint8_t getLevel(void);
 
-  bool onInput(uint8_t input, World * w);
+  virtual bool onInput(uint8_t input, World * w);
 };
 #endif
