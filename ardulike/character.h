@@ -6,7 +6,7 @@
 #include "world.h"
 
 class Character : public Entity {
-private:
+protected:
   uint8_t hp;
   uint8_t toughness;
   bool alive;

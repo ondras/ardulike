@@ -15,13 +15,17 @@ uint8_t Stairs::getTargetPosition(void)
   return target_position;
 }
 
+/*
+ * FIXME:
+ * 1) it'd be better to have direction attribute here
+ * 2) this implicitly prevents NPCs from going down the stairs
+ */
 bool Stairs::onInput(uint8_t input, World * w)
 {
-  Character * player = w->getPlayer();
+  Player * player = w->getPlayer();
 
   if (player->getPosition() != position || player->getLevel() != level) { return false; }
 
-  /* FIXME: it'd be better to have direction attribute here */
   if ( (representation == '>' && input == BUTTON_DOWN) || (representation == '<' && input == BUTTON_UP)) {
     player->setPosition(target_position);
     player->setLevel(target_level);

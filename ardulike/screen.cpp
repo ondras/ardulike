@@ -10,7 +10,7 @@ void Screen::render(World * w)
 {
   if (!w->hasChanged()) { return; }
 
-  Character * player = w->getPlayer();
+  Player * player = w->getPlayer();
 
   lcd.clear();
   lcd.setCursor(0, 0);

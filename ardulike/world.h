@@ -3,12 +3,12 @@
 
 #include "constants.h"
 
-class Character;
+class Player;
 class Entity;
 
 class World {
 private:
-  Character * player;
+  Player    * player;
   Entity    * entities[64];
   uint8_t  entity_count;
   uint8_t  size;
@@ -17,8 +17,8 @@ private:
 public:
   World(void);
 
-  void        addPlayer(Character * _player);
-  Character * getPlayer(void);
+  void     addPlayer(Player * _player);
+  Player * getPlayer(void);
 
   void    addEntity(Entity * entity);
   void    addEntities(int count, ...);

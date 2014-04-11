@@ -3,7 +3,7 @@
 
 #include "constants.h"
 #include "entity.h"
-#include "character.h"
+#include "player.h"
 
 class Stairs : public Entity {
   private:

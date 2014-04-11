@@ -4,12 +4,14 @@
 #include "world.h"
 #include "input.h"
 #include "character.h"
+#include  "player.h"
 #include "screen.h"
 #include "stairs.h"
 
 World w = World();
 
-Character player   = Character('@', 2, 0, 0, 5, 3);
+Player   player    = Player('@', 2, 0, 0, 5, 3);
+
 Character ogre     = Character('O', 1, 0, 2, 5, 2);
 Character orc      = Character('o', 1, 1, 10, 3, 1);
 Character dog      = Character('d', 1, 1, 2 , 1, 1);

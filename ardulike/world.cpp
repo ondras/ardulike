@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 #include "world.h"
-#include "character.h"
+#include "player.h"
 #include "entity.h"
 
 World::World(void):
@@ -69,12 +69,12 @@ uint8_t World::getEntityCount(void)
   return entity_count;
 }
 
-void World::addPlayer(Character * _player)
+void World::addPlayer(Player * _player)
 {
   player = _player;
 }
 
-Character * World::getPlayer(void)
+Player * World::getPlayer(void)
 {
   return player;
 }

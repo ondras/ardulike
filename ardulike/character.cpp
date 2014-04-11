@@ -51,10 +51,5 @@ Entity(_representation, _display_depth, _level, _position), hp(_hp), toughness(_
 
 bool Character::onInput(uint8_t input, World * w)
 {
-  Character * player = w->getPlayer();
-  if (this == player) {
-   if (input == BUTTON_LEFT) { player->setPosition(player->getPosition() - 1); return true; }
-   if (input == BUTTON_RIGHT) { player->setPosition(player->getPosition() + 1); return true; }
-  }
   return false;
 }

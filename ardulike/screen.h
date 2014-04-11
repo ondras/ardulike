@@ -4,7 +4,7 @@
 #include <LiquidCrystal.h>
 
 #include "constants.h"
-#include "character.h"
+#include "player.h"
 #include "world.h"
 #include "stairs.h"
 
