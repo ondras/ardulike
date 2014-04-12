@@ -1,8 +1,9 @@
 #include "stairs.h"
 
-Stairs::Stairs(char _representation, uint8_t _display_depth, uint8_t _level, uint8_t _position, uint8_t _target_level, uint8_t _target_position):
-Entity(_representation, _display_depth, _level, _position), target_level(_target_level), target_position(_target_position)
+Stairs::Stairs(uint8_t _level, uint8_t _position, uint8_t _target_level, uint8_t _target_position):
+Entity((_target_level <= _level) ? CHAR_STAIRS_UP : CHAR_STAIRS_DOWN, _level, _position), target_level(_target_level), target_position(_target_position)
 {
+  setDisplayDepth(DISPLAY_DEPTH_TERRAIN);
 }
 
 uint8_t Stairs::getTargetLevel(void)
@@ -17,8 +18,7 @@ uint8_t Stairs::getTargetPosition(void)
 
 /*
  * FIXME:
- * 1) it'd be better to have direction attribute here
- * 2) this implicitly prevents NPCs from going down the stairs
+ * 1) this implicitly prevents NPCs from going down the stairs
  */
 bool Stairs::onInput(uint8_t input, World * w)
 {
@@ -26,7 +26,7 @@ bool Stairs::onInput(uint8_t input, World * w)
 
   if (player->getPosition() != position || player->getLevel() != level) { return false; }
 
-  if ( (representation == '>' && input == BUTTON_DOWN) || (representation == '<' && input == BUTTON_UP)) {
+  if ( ((target_level > level) && input == BUTTON_DOWN) || ((target_level <= level) && input == BUTTON_UP)) {
     player->setPosition(target_position);
     player->setLevel(target_level);
   }

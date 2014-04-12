@@ -10,17 +10,17 @@
 
 World w = World();
 
-Player   player    = Player('@', 2, 0, 0, 5, 3);
+Player   player    = Player(0, 0, 5, 3);
 
-Npc ogre     = Npc('O', 1, 0, 2, 5, 2, true);
-Npc orc      = Npc('o', 1, 1, 10, 3, 1, true);
-Npc dog      = Npc('d', 1, 1, 2 , 1, 1, false);
+Npc ogre     = Npc(0, 2, 5, 2, CHAR_OGRE);
+Npc orc      = Npc(1, 10, 3, 1, CHAR_ORC);
+Npc dog      = Npc(1, 2 , 1, 1, CHAR_DOG);
 
-Stairs stairs_down = Stairs('>', 0, 0, 25, 1, 6);
-Stairs stairs_up   = Stairs('<', 0, 1, 6,  0, 25);
+Stairs stairs_down = Stairs(0, 25, 1, 6);
+Stairs stairs_up   = Stairs(1, 6,  0, 25);
 
-Entity tree        = Entity('T', 0, 0, 8);
-Entity wall        = Entity('#', 4, 0, 21);
+Entity tree        = Entity(0, 8, CHAR_TREE);
+Entity wall        = Entity(0, 21, CHAR_WALL);
 
 Screen screen = Screen();
 

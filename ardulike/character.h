@@ -13,7 +13,7 @@ protected:
 
   void die(void);
 public:
-  Character(char _representation, uint8_t _display_depth, uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness);
+  Character(uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness, char _representation);
   uint8_t getToughness(void);
   uint8_t getHp(void);
   void damage(uint8_t damage);

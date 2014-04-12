@@ -14,6 +14,25 @@
 
 #define SCREEN_ROWS   2
 #define SCREEN_COLS  16
-#define SCREEN_DEPTH  8  // 'z' axis
+#define SCREEN_DEPTH  8  // 'z' axis going 'towards the player', i.e 8 is nearest
+
+/* display depths */
+
+#define DISPLAY_DEPTH_PLAYER  3
+#define DISPLAY_DEPTH_NPCS    2
+#define DISPLAY_DEPTH_ITEMS   1
+#define DISPLAY_DEPTH_TERRAIN 0
+
+/* characters */
+
+#define CHAR_PLAYER      '@'
+#define CHAR_WALL        '#'
+#define CHAR_FLOOR       '.'
+#define CHAR_TREE        'T'
+#define CHAR_STAIRS_UP   '>'
+#define CHAR_STAIRS_DOWN '<'
+#define CHAR_OGRE        'O'
+#define CHAR_ORC         'o'
+#define CHAR_DOG         'd'
 
 #endif

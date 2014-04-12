@@ -43,7 +43,7 @@ char * World::getView(void)
   uint8_t level = player->getLevel();
   uint8_t pos, lvl;
 
-  memset(view, '.', SCREEN_COLS);
+  memset(view, CHAR_FLOOR, SCREEN_COLS);
 
   for (uint8_t depth = 0; depth < SCREEN_DEPTH; depth++) {
     for (uint8_t i = 0; i < entity_count; i++) {

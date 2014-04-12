@@ -1,7 +1,8 @@
 #include "player.h"
-Player::Player(char _representation, uint8_t _display_depth, uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness):
-Character(_representation, _display_depth, _level, _position, _hp, _toughness)
+Player::Player(uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness):
+Character(_level, _position, _hp, _toughness, CHAR_PLAYER)
 {
+  setDisplayDepth(DISPLAY_DEPTH_PLAYER);
 }
 
 bool Player::onInput(uint8_t input, World * w)
