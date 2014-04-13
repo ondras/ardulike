@@ -9,7 +9,8 @@
 #define ENTITY_ITEM             4
 #define ENTITY_TERRAIN          8
 #define ENTITY_NPC             16
-#define ENTITY_BLOCKS_MOVEMENT 32
+#define ENTITY_PLAYER          32
+#define ENTITY_BLOCKS_MOVEMENT 64
 
 class World;
 

@@ -94,3 +94,18 @@ bool World::hasChanged(void)
 {
   return changed;
 }
+
+Entity * World::findEntity(uint8_t level, uint8_t position, uint8_t properties)
+{
+  Entity * e;
+
+  for (uint8_t i = 0; i < entity_count; i++) {
+    e = entities[i];
+
+    if (e->getLevel() == level && e->getPosition() == position && (e->getProperties() & properties)) {
+      return e;
+    }
+  }
+
+  return NULL;
+}

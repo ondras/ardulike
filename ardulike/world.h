@@ -20,6 +20,8 @@ public:
   void     addPlayer(Player * _player);
   Player * getPlayer(void);
 
+  Entity * findEntity(uint8_t level, uint8_t position, uint8_t properties);
+
   void    addEntity(Entity * entity);
   void    addEntities(int count, ...);
 
