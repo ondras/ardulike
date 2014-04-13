@@ -3,6 +3,14 @@
 
 #include <Arduino.h>
 
+#define ENTITY_NONE             0
+#define ENTITY_HOSTILE          1
+#define ENTITY_ALIVE            2
+#define ENTITY_ITEM             4
+#define ENTITY_TERRAIN          8
+#define ENTITY_NPC             16
+#define ENTITY_BLOCKS_MOVEMENT 32
+
 class World;
 
 class Entity {
@@ -14,7 +22,7 @@ protected:
   char representation;
 
 public:
-  Entity(uint8_t _level, uint8_t _position, char _representation);
+  Entity(uint8_t _level, uint8_t _position, char _representation, uint8_t _properties);
 
   uint8_t getProperties(void);
   void    setProperties(uint8_t _properties);

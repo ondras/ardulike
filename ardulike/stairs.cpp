@@ -1,9 +1,9 @@
 #include "stairs.h"
 
 Stairs::Stairs(uint8_t _level, uint8_t _position, uint8_t _target_level, uint8_t _target_position):
-Entity((_target_level <= _level) ? CHAR_STAIRS_UP : CHAR_STAIRS_DOWN, _level, _position), target_level(_target_level), target_position(_target_position)
+Entity(_level, _position, (_target_level <= _level) ? CHAR_STAIRS_UP : CHAR_STAIRS_DOWN, ENTITY_TERRAIN), target_level(_target_level), target_position(_target_position)
 {
-  setDisplayDepth(DISPLAY_DEPTH_TERRAIN);
+  display_depth = DISPLAY_DEPTH_TERRAIN;
 }
 
 uint8_t Stairs::getTargetLevel(void)

@@ -1,8 +1,8 @@
 #include "entity.h"
 #include "world.h"
 
-Entity::Entity(uint8_t _level, uint8_t _position, char _representation):
-  representation(_representation), position(_position), level(_level), display_depth(DISPLAY_DEPTH_TERRAIN)
+Entity::Entity(uint8_t _level, uint8_t _position, char _representation, uint8_t _properties):
+  representation(_representation), position(_position), level(_level), properties(_properties), display_depth(DISPLAY_DEPTH_TERRAIN)
 {
 }
 
@@ -44,6 +44,16 @@ uint8_t Entity::getLevel(void)
 uint8_t Entity::getPosition(void)
 {
   return position;
+}
+
+uint8_t Entity::getProperties(void)
+{
+  return properties;
+}
+
+void Entity::setProperties(uint8_t _properties)
+{
+  properties = _properties;
 }
 
 bool Entity::onInput(uint8_t input, World * w)

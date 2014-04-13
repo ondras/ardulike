@@ -19,8 +19,8 @@ Npc dog      = Npc(1, 2 , 1, 1, CHAR_DOG);
 Stairs stairs_down = Stairs(0, 25, 1, 6);
 Stairs stairs_up   = Stairs(1, 6,  0, 25);
 
-Entity tree        = Entity(0, 8, CHAR_TREE);
-Entity wall        = Entity(0, 21, CHAR_WALL);
+Entity tree        = Entity(0, 8, CHAR_TREE, ENTITY_TERRAIN);
+Entity wall        = Entity(0, 21, CHAR_WALL, ENTITY_TERRAIN | ENTITY_BLOCKS_MOVEMENT);
 
 Screen screen = Screen();
 

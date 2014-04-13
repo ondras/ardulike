@@ -1,5 +1,10 @@
 #include "character.h"
 
+Character::Character(uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness, char _representation, uint8_t _properties):
+Entity(_level, _position, _representation, _properties), hp(_hp), toughness(_toughness)
+{
+}
+
 uint8_t Character::getToughness(void)
 {
   return toughness;
@@ -7,12 +12,12 @@ uint8_t Character::getToughness(void)
 
 bool Character::isAlive(void)
 {
-  return alive;
+  return properties & ENTITY_ALIVE;
 }
 
 void Character::damage(uint8_t dmg)
 {
-  if (alive) {
+  if (isAlive()) {
     if (hp <= dmg) {
       die();
     } else {
@@ -28,8 +33,8 @@ uint8_t Character::getHp(void)
 
 void Character::die(void)
 {
-  hp    = 0;
-  alive = 0;
+  hp             = 0;
+  properties    &= ~(ENTITY_ALIVE | ENTITY_BLOCKS_MOVEMENT);
   representation = '%';
 }
 
@@ -42,12 +47,6 @@ bool Character::attack(Character * other)
   } else {
     return false;
   }
-}
-
-Character::Character(uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness, char _representation):
-Entity(_level, _position, _representation), hp(_hp), toughness(_toughness), alive(1)
-{
-  setDisplayDepth(DISPLAY_DEPTH_NPCS);
 }
 
 bool Character::onInput(uint8_t input, World * w)
