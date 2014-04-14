@@ -2,4 +2,5 @@
 
 ## TODO
 
-1. Add on input events
+1. Add messages
+2. Start designing levels / generate them

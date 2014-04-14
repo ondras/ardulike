@@ -5,6 +5,7 @@
 
 class Player;
 class Entity;
+class Npc;
 
 class World {
 private:
@@ -20,6 +21,9 @@ public:
   void     addPlayer(Player * _player);
   Player * getPlayer(void);
 
+  bool isPassable(uint8_t level, uint8_t position);
+
+  Npc * findNpc(uint8_t level, uint8_t position);
   Entity * findEntity(uint8_t level, uint8_t position, uint8_t properties);
 
   void    addEntity(Entity * entity);

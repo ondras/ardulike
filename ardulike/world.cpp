@@ -6,6 +6,7 @@
 #include "world.h"
 #include "player.h"
 #include "entity.h"
+#include "npc.h"
 
 World::World(void):
   entity_count(0), size(128), changed(true)
@@ -93,6 +94,20 @@ void World::onInput(uint8_t input)
 bool World::hasChanged(void)
 {
   return changed;
+}
+
+bool World::isPassable(uint8_t level, uint8_t position)
+{
+  if (position < 0 || position >= getSize()) {
+    return false;
+  } else {
+    return findEntity(level, position, ENTITY_BLOCKS_MOVEMENT) == NULL;
+  }
+}
+
+Npc * World::findNpc(uint8_t level, uint8_t position)
+{
+  return (Npc *) findEntity(level, position, ENTITY_NPC);
 }
 
 Entity * World::findEntity(uint8_t level, uint8_t position, uint8_t properties)

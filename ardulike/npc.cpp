@@ -14,15 +14,29 @@ bool Npc::isHostile(void)
 bool Npc::onInput(uint8_t input, World * w)
 {
   Player * p = w->getPlayer();
-  int8_t  d = p->getPosition() - position;
+  int8_t   d = p->getPosition() - position;
+  uint8_t  new_position;
 
-  if (!isHostile() || p->getLevel() != level) { return false; }
+  if (!isHostile() || !isAlive() || p->getLevel() != level) { return false; }
 
-  if (abs(d) <= 1 || abs(d) > 5) {
-    return false;
-  } else {
-    if (d > 0) { position++; }
-    if (d < 0) { position--; }
+  if (abs(d) > 5) { return false; }
+
+  if (d > 1) {
+    new_position = position + 1;
+  } else
+  if (d < -1) {
+    new_position = position - 1;
+  }
+
+  if (w->isPassable(level, new_position)) {
+    position = new_position;
     return true;
   }
+
+  if (abs(d) == 1 && p->isAlive()) {
+    attack(p);
+    return true;
+  }
+
+  return false;
 }
