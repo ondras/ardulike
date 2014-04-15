@@ -7,7 +7,9 @@
 #include "player.h"
 #include "screen.h"
 #include "stairs.h"
+#include "msgqueue.h"
 
+MsgQueue q = MsgQueue(10);
 World w = World();
 
 Player   player    = Player(0, 0, 5, 3);
@@ -25,9 +27,11 @@ Entity wall        = Entity(0, 21, CHAR_WALL, ENTITY_TERRAIN | ENTITY_BLOCKS_MOV
 Screen screen = Screen();
 
 void setup(void) {
+  q.addMessage("This is a long message.");
+  q.addMessage("This is another long message.");
   w.addPlayer(&player);
   w.addEntities(8, &player, &ogre, &stairs_up, &stairs_down, &orc, &dog, &wall, &tree);
-  screen.render(&w);
+  screen.render(&w, &q);
 }
 
 void loop(void) {
@@ -35,5 +39,5 @@ void loop(void) {
 
   w.onInput(input);
 
-  screen.render(&w);
+  screen.render(&w,&q);
 }

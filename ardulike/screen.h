@@ -7,13 +7,14 @@
 #include "player.h"
 #include "world.h"
 #include "stairs.h"
+#include "msgqueue.h"
 
 class Screen {
 private:
   LiquidCrystal lcd;
 public:
   Screen();
-  void render(World * w);
+  void render(World * w, MsgQueue * q);
 };
 
 #endif

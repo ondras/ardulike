@@ -35,4 +35,10 @@
 #define CHAR_ORC         'o'
 #define CHAR_DOG         'd'
 
+/* messages */
+
+#define MSGQUEUE_MAX_MESSAGES      4
+#define MSGQUEUE_MAX_MESSAGE_LEN  31
+#define MSGQUEUE_ROTATE_TIME_MS 1500
+
 #endif
