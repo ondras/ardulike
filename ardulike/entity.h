@@ -2,6 +2,7 @@
 #define __ARDULIKE_ENTITY_H__
 
 #include <Arduino.h>
+#include "msgqueue.h"
 
 #define ENTITY_NONE             0
 #define ENTITY_HOSTILE          1
@@ -16,6 +17,8 @@ class World;
 
 class Entity {
 protected:
+  MsgQueue * output;
+
   uint8_t display_depth;
   uint8_t position;
   uint8_t level;
@@ -24,6 +27,8 @@ protected:
 
 public:
   Entity(uint8_t _level, uint8_t _position, char _representation, uint8_t _properties);
+
+  void    setOutput(MsgQueue * q);
 
   uint8_t getProperties(void);
   void    setProperties(uint8_t _properties);

@@ -4,6 +4,10 @@
 #include <inttypes.h>
 #include "constants.h"
 
+#define MSGQUEUE_MAX_MESSAGES      4
+#define MSGQUEUE_MAX_MESSAGE_LEN  31
+#define MSGQUEUE_ROTATE_TIME_MS 1500
+
 class MsgQueue {
   private:
     uint16_t displayed_at;

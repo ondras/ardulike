@@ -2,6 +2,7 @@
 #define __ARDULIKE_WORLD_H__
 
 #include "constants.h"
+#include "msgqueue.h"
 
 class Player;
 class Entity;
@@ -9,6 +10,7 @@ class Npc;
 
 class World {
 private:
+  MsgQueue  * output;
   Player    * player;
   Entity    * entities[64];
   uint8_t  entity_count;
@@ -17,6 +19,9 @@ private:
   bool changed;
 public:
   World(void);
+
+  void    setOutput(MsgQueue * q);
+  void    init(void);
 
   void     addPlayer(Player * _player);
   Player * getPlayer(void);

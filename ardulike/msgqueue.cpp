@@ -42,7 +42,7 @@ bool MsgQueue::viewChanged(void)
 
 char * MsgQueue::getView(void)
 {
-  memset(view, ' ', SCREEN_COLS);
+  memset(view, CHAR_SPACE, SCREEN_COLS);
 
   if (message_count > 0) {
     message_size = strlen(messages[0]);

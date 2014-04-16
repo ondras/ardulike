@@ -56,6 +56,11 @@ void Entity::setProperties(uint8_t _properties)
   properties = _properties;
 }
 
+void Entity::setOutput(MsgQueue * q)
+{
+  output = q;
+}
+
 bool Entity::onInput(uint8_t input, World * w)
 {
   return false;

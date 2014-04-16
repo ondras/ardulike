@@ -124,3 +124,15 @@ Entity * World::findEntity(uint8_t level, uint8_t position, uint8_t properties)
 
   return NULL;
 }
+
+void World::setOutput(MsgQueue * q)
+{
+  output = q;
+}
+
+void World::init(void)
+{
+  for (uint8_t i = 0; i < entity_count; i++) {
+    entities[i]->setOutput(output);
+  }
+}

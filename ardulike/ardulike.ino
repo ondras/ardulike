@@ -27,10 +27,10 @@ Entity wall        = Entity(0, 21, CHAR_WALL, ENTITY_TERRAIN | ENTITY_BLOCKS_MOV
 Screen screen = Screen();
 
 void setup(void) {
-  q.addMessage("This is a long message.");
-  q.addMessage("This is another long message.");
+  w.setOutput(&q);
   w.addPlayer(&player);
   w.addEntities(8, &player, &ogre, &stairs_up, &stairs_down, &orc, &dog, &wall, &tree);
+  w.init();
   screen.render(&w, &q);
 }
 
