@@ -8,7 +8,7 @@ Screen::Screen():
 
 void Screen::render(World * w, MsgQueue * q)
 {
-  if (!w->hasChanged()) { return; }
+  if (!w->hasChanged() && !q->viewChanged()) { return; }
 
   Player * player = w->getPlayer();
 

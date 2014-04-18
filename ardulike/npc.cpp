@@ -34,7 +34,11 @@ bool Npc::onInput(uint8_t input, World * w)
   }
 
   if (abs(d) == 1 && p->isAlive()) {
-    attack(p);
+    if (attack(p)) {
+      say("The creature hits you.");
+    } else {
+      say("The creature misses you.");
+    }
     return true;
   }
 

@@ -9,10 +9,10 @@
 #include "stairs.h"
 #include "msgqueue.h"
 
-MsgQueue q = MsgQueue(10);
+MsgQueue q = MsgQueue(9);
 World w = World();
 
-Player   player    = Player(0, 0, 5, 3);
+Player   player    = Player(0, 0, 10, 3);
 
 Npc ogre     = Npc(0, 2, 5, 2, CHAR_OGRE);
 Npc orc      = Npc(1, 10, 3, 1, CHAR_ORC);

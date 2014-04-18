@@ -18,6 +18,7 @@ class MsgQueue {
 
     char messages[MSGQUEUE_MAX_MESSAGES][MSGQUEUE_MAX_MESSAGE_LEN + 1];
     char view[SCREEN_COLS + 1];
+    bool queue_processing;
 
     void dropMessage(void);
   public:
@@ -25,7 +26,6 @@ class MsgQueue {
     bool   addMessage(char * msg);
     bool   viewChanged(void);
     char * getView(void);
-    uint8_t getCount(void);
 };
 
 #endif

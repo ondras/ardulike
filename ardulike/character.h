@@ -18,6 +18,7 @@ public:
   void damage(uint8_t damage);
   bool  isAlive(void);
   bool attack(Character * other);
+  void say(char * message);
 
   virtual bool onInput(uint8_t input, World * w);
 };

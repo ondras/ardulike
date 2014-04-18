@@ -2,7 +2,7 @@
 #include "msgqueue.h"
 
 MsgQueue::MsgQueue(uint8_t _display_width):
-  display_width(_display_width), displayed_at(millis()), message_count(0), message_pos(0), message_size(0)
+  display_width(_display_width), displayed_at(millis()), message_count(0), message_pos(0), message_size(0), queue_processing(true)
 {
 }
 
@@ -28,32 +28,27 @@ bool MsgQueue::addMessage(char * msg)
   messages[message_count][MSGQUEUE_MAX_MESSAGE_LEN] = '\0';
 
   message_count++;
-}
-
-uint8_t MsgQueue::getCount(void)
-{
-  return message_count;
+  queue_processing = true;
 }
 
 bool MsgQueue::viewChanged(void)
 {
-  return message_count > 0 && (millis() - displayed_at) > MSGQUEUE_ROTATE_TIME_MS;
+  return queue_processing && (millis() - displayed_at) > MSGQUEUE_ROTATE_TIME_MS;
 }
 
 char * MsgQueue::getView(void)
 {
-  memset(view, CHAR_SPACE, SCREEN_COLS);
-
-  if (message_count > 0) {
+  if (message_count == 0) {
+    memset(view, CHAR_SPACE, SCREEN_COLS);
+    queue_processing = false;
+  } else {
     message_size = strlen(messages[0]);
-
-    // Drop the old message from the queue
-    if (message_pos >= message_size) { dropMessage(); }
 
     snprintf(view, display_width + 1, "%s", &(messages[0][message_pos]));
     view[display_width] = '\0';
 
     message_pos += display_width;
+    if (message_pos >= message_size) { dropMessage(); }
   }
 
   displayed_at = millis();

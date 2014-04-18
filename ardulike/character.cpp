@@ -5,6 +5,11 @@ Entity(_level, _position, _representation, _properties), hp(_hp), toughness(_tou
 {
 }
 
+void Character::say(char * message)
+{
+  output->addMessage(message);
+}
+
 uint8_t Character::getToughness(void)
 {
   return toughness;
