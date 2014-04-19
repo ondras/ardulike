@@ -13,6 +13,7 @@ private:
   MsgQueue  * output;
   Player    * player;
   Entity    * entities[64];
+  uint32_t turns;
   uint8_t  entity_count;
   uint8_t  size;
   char view[SCREEN_COLS + 1];
@@ -37,6 +38,7 @@ public:
   char *  getView(void);
   uint8_t getSize(void);
   uint8_t getEntityCount(void);
+  uint32_t getTurns(void);
 
   bool    hasChanged(void);
   void    onInput(uint8_t input);

@@ -9,8 +9,13 @@
 #include "npc.h"
 
 World::World(void):
-  entity_count(0), size(128), changed(true)
+  entity_count(0), size(128), turns(0), changed(true)
 {
+}
+
+uint32_t World::getTurns(void)
+{
+  return turns;
 }
 
 void World::addEntity(Entity * entity)
@@ -85,6 +90,7 @@ void World::onInput(uint8_t input)
   changed = false;
 
   if (input == BUTTON_NONE) { return; }
+  if (input != BUTTON_SELECT) { turns++; }
 
   for (uint8_t i = 0; i < entity_count; i++) {
     changed |= entities[i]->onInput(input, this);
