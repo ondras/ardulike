@@ -1,0 +1,64 @@
+#!/usr/bin/env ruby
+
+require 'ostruct'
+require 'json'
+
+require './config'
+require './helpers'
+require './entities'
+require './algorithms'
+
+player = Player.new(
+  Conditions.starting_toughness,
+  Conditions.starting_hp,
+  Conditions.starting_hp,
+  Conditions.starting_exp,
+  Conditions.starting_exp_next,
+  Conditions.starting_level,
+  0, 0, nil)
+
+next_combat = poisson(Rules.turns_per_combat)
+next_heal   = poisson(Rules.turns_per_heal)
+opponent    = nil
+turn        = 1
+
+while turn < Rules.turns do
+  player.hp_mean = (player.hp_mean * (turn - 1) + player.hp) / turn;
+
+  if turn == next_heal
+    if player.hp < player.hp_max
+      heal(player, Rules)
+      puts "[#{turn}] [heal] #{player}"
+    end
+    next_heal += poisson(Rules.turns_per_heal)
+  end
+
+  if turn == next_combat
+    opponent = generate_opponent(player, Rules)
+    puts "[#{turn}] [encounter] #{opponent}"
+  end
+
+  if opponent != nil
+    puts "[#{turn}] [combat] #{player}"
+    combat(player, opponent)
+    puts "[#{turn}] [combat] #{opponent}"
+    combat(opponent, player)
+
+    if opponent.hp <= 0
+      player.kills += 1
+      gainexp(player, opponent, Rules)
+      opponent = nil
+      puts "[#{turn}] [kill] #{player}"
+    end
+
+    if player.hp <= 0
+      player.died_in_turn = turn
+      puts "[#{turn}] [death] #{player}"
+      break
+    end
+
+    next_combat = turn + poisson(Rules.turns_per_combat)
+  end
+
+  turn += 1
+end
