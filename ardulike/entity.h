@@ -19,11 +19,11 @@ class Entity {
 protected:
   MsgQueue * output;
 
-  uint8_t display_depth;
+  char representation;
   uint8_t position;
   uint8_t level;
   uint8_t properties;
-  char representation;
+  uint8_t display_depth;
 
 public:
   Entity(uint8_t _level, uint8_t _position, char _representation, uint8_t _properties);

@@ -29,7 +29,16 @@ bool Player::onInput(uint8_t input, World * w)
 
   npc = w->findNpc(level, new_position);
   if (npc && npc->isAlive() && npc->isHostile()) {
-    attack(npc);
+    if (attack(npc)) {
+      if (!npc->isAlive()) {
+        gainExperience(npc);
+        say("You kill the creature.");
+      } else {
+        say("You hit.");
+      }
+    } else {
+      say("You missed.");
+    }
     return true;
   }
 

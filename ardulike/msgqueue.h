@@ -6,7 +6,7 @@
 
 #define MSGQUEUE_MAX_MESSAGES      4
 #define MSGQUEUE_MAX_MESSAGE_LEN  31
-#define MSGQUEUE_ROTATE_TIME_MS 1500
+#define MSGQUEUE_ROTATE_TIME_MS  750
 
 class MsgQueue {
   private:
@@ -23,7 +23,7 @@ class MsgQueue {
     void dropMessage(void);
   public:
     MsgQueue(uint8_t _display_width);
-    bool   addMessage(char * msg);
+    bool   addMessage(const char * msg);
     bool   viewChanged(void);
     char * getView(void);
 };

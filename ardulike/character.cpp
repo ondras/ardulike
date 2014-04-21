@@ -1,11 +1,11 @@
 #include "character.h"
 
 Character::Character(uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness, char _representation, uint8_t _properties):
-Entity(_level, _position, _representation, _properties), hp(_hp), toughness(_toughness)
+Entity(_level, _position, _representation, _properties), hp(_hp), toughness(_toughness), exp(0), character_level(1)
 {
 }
 
-void Character::say(char * message)
+void Character::say(const char * message)
 {
   output->addMessage(message);
 }
@@ -41,6 +41,10 @@ void Character::die(void)
   hp             = 0;
   properties    &= ~(ENTITY_ALIVE | ENTITY_BLOCKS_MOVEMENT);
   representation = '%';
+}
+
+void Character::gainExperience(Character * other)
+{
 }
 
 bool Character::attack(Character * other)

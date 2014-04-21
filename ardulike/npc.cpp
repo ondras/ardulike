@@ -15,7 +15,7 @@ bool Npc::onInput(uint8_t input, World * w)
 {
   Player * p = w->getPlayer();
   int8_t   d = p->getPosition() - position;
-  uint8_t  new_position;
+  uint8_t  new_position = position;
 
   if (!isHostile() || !isAlive() || p->getLevel() != level) { return false; }
 
@@ -35,7 +35,11 @@ bool Npc::onInput(uint8_t input, World * w)
 
   if (abs(d) == 1 && p->isAlive()) {
     if (attack(p)) {
-      say("The creature hits you.");
+      if (!p->isAlive()) {
+        say("You die.");
+      } else {
+        say("The creature hits you.");
+      }
     } else {
       say("The creature misses you.");
     }

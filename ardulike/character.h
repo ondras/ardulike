@@ -9,6 +9,8 @@ class Character : public Entity {
 protected:
   uint8_t hp;
   uint8_t toughness;
+  uint32_t exp;
+  uint8_t character_level;
 
   void die(void);
 public:
@@ -18,7 +20,8 @@ public:
   void damage(uint8_t damage);
   bool  isAlive(void);
   bool attack(Character * other);
-  void say(char * message);
+  void gainExperience(Character * other);
+  void say(const char * message);
 
   virtual bool onInput(uint8_t input, World * w);
 };

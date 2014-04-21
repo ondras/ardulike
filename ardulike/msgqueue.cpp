@@ -2,7 +2,7 @@
 #include "msgqueue.h"
 
 MsgQueue::MsgQueue(uint8_t _display_width):
-  display_width(_display_width), displayed_at(millis()), message_count(0), message_pos(0), message_size(0), queue_processing(true)
+  displayed_at(millis()), display_width(_display_width), message_count(0), message_pos(0), message_size(0), queue_processing(true)
 {
 }
 
@@ -19,7 +19,7 @@ void MsgQueue::dropMessage(void)
   message_pos = 0;
 }
 
-bool MsgQueue::addMessage(char * msg)
+bool MsgQueue::addMessage(const char * msg)
 {
   if (message_count == MSGQUEUE_MAX_MESSAGES) { return false; }
   if (strlen(msg) >= MSGQUEUE_MAX_MESSAGE_LEN) { return false; }
@@ -29,6 +29,7 @@ bool MsgQueue::addMessage(char * msg)
 
   message_count++;
   queue_processing = true;
+  return true;
 }
 
 bool MsgQueue::viewChanged(void)
