@@ -1,0 +1,12 @@
+#!/bin/bash
+
+rm -f combat.dat
+for toughness in $(seq 0 0.1 2); do
+  echo $toughness
+  for hp in $(seq 0 0.1 2); do
+    ./combat $toughness $hp >> combat.dat
+  done
+  echo >> combat.dat
+done
+
+gnuplot -e 'set terminal png size 1280,1024 enhanced font "Helvetica,12"; set output "combat.png"; set xlabel "Toughness"; set ylabel "Hp"; set zlabel "Kills/Combats"; splot "combat.dat" using 1:2:3 with lines;'
