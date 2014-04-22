@@ -15,7 +15,7 @@ player = Player.new(
   Conditions.starting_exp,
   Conditions.starting_exp_next,
   Conditions.starting_level,
-  0, 0, nil)
+  0, 0, 0, nil)
 
 next_combat = poisson(Rules.turns_per_combat)
 next_heal   = poisson(Rules.turns_per_heal)
