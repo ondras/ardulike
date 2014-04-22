@@ -8,6 +8,12 @@ require './helpers'
 require './entities'
 require './algorithms'
 
+DEBUG = false
+
+def debug(msg)
+  puts msg if DEBUG
+end
+
 player = Player.new(
   Conditions.starting_toughness,
   Conditions.starting_hp,
@@ -28,33 +34,35 @@ while turn < Rules.turns do
   if turn == next_heal
     if player.hp < player.hp_max
       heal(player, Rules)
-      puts "[#{turn}] [heal] #{player}"
+      debug "[#{turn}] [heal] #{player}"
     end
     next_heal += poisson(Rules.turns_per_heal)
   end
 
   if turn == next_combat
     opponent = generate_opponent(player, Rules)
-    puts "[#{turn}] [encounter] #{opponent}"
+    debug "[#{turn}] [encounter] #{opponent}"
   end
 
   if opponent != nil
-    puts "[#{turn}] [combat] #{player}"
+    debug "[#{turn}] [combat] #{player}"
     combat(player, opponent)
-    puts "[#{turn}] [combat] #{opponent}"
-    combat(opponent, player)
 
     if opponent.hp <= 0
       player.kills += 1
       gainexp(player, opponent, Rules)
       opponent = nil
-      puts "[#{turn}] [kill] #{player}"
-    end
+      debug "[#{turn}] [kill] #{player}"
+    else
+      debug "[#{turn}] [combat] #{opponent}"
+      combat(opponent, player)
 
-    if player.hp <= 0
-      player.died_in_turn = turn
-      puts "[#{turn}] [death] #{player}"
-      break
+      if player.hp <= 0
+        player.deaths += 1
+        player.died_in_turn = turn
+        debug "[#{turn}] [death] #{player}"
+        break
+      end
     end
 
     next_combat = turn + poisson(Rules.turns_per_combat)
@@ -62,3 +70,5 @@ while turn < Rules.turns do
 
   turn += 1
 end
+
+puts "#{player}"
