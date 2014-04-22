@@ -1,6 +1,8 @@
 def combat(x, y)
-  dmg   = [((x.toughness + rand(x.toughness)) - (y.toughness + rand(y.toughness))).to_i, 0].max
-  y.hp -= dmg
+  attack  = [[normal(x.toughness, x.toughness / 3.0), 0].max, 2 * x.toughness].min
+  defense = [[normal(y.toughness, y.toughness / 3.0), 0].max, 2 * y.toughness].min
+  dmg     = [(attack - defense).to_i, 0].max
+  y.hp   -= dmg
 end
 
 def levelup(player, rules)
