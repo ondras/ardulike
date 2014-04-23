@@ -2,7 +2,6 @@
 
 ## TODO
 
-1. Add strength attribute
-2. Use normally distributed random numbers for combat
-3. Add experience / levels
+1. Use normally distributed random numbers for combat
+2. Add experience / levels
 3. Generate monsters
