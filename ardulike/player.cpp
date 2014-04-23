@@ -1,8 +1,8 @@
 #include "player.h"
 #include "npc.h"
 
-Player::Player(uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness):
-Character(_level, _position, _hp, _toughness, CHAR_PLAYER, ENTITY_ALIVE | ENTITY_BLOCKS_MOVEMENT)
+Player::Player(uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness, uint8_t _strength):
+Character(_level, _position, _hp, _toughness, _strength, CHAR_PLAYER, ENTITY_ALIVE | ENTITY_BLOCKS_MOVEMENT)
 {
   display_depth = DISPLAY_DEPTH_PLAYER;
 }

@@ -1,7 +1,7 @@
 #include "npc.h"
 
-Npc::Npc(uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness, char _representation):
-  Character(_level, _position, _hp, _toughness, _representation, ENTITY_NPC | ENTITY_HOSTILE | ENTITY_ALIVE | ENTITY_BLOCKS_MOVEMENT)
+Npc::Npc(uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness, uint8_t _strength, char _representation):
+  Character(_level, _position, _hp, _toughness, _strength, _representation, ENTITY_NPC | ENTITY_HOSTILE | ENTITY_ALIVE | ENTITY_BLOCKS_MOVEMENT)
 {
   display_depth = DISPLAY_DEPTH_NPCS;
 }

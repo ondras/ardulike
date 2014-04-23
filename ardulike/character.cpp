@@ -1,7 +1,7 @@
 #include "character.h"
 
-Character::Character(uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness, char _representation, uint8_t _properties):
-Entity(_level, _position, _representation, _properties), hp(_hp), toughness(_toughness), exp(0), character_level(1)
+Character::Character(uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness, uint8_t _strength, char _representation, uint8_t _properties):
+Entity(_level, _position, _representation, _properties), hp(_hp), toughness(_toughness), strength(_strength), exp(0), character_level(1)
 {
 }
 
@@ -13,6 +13,11 @@ void Character::say(const char * message)
 uint8_t Character::getToughness(void)
 {
   return toughness;
+}
+
+uint8_t Character::getStrength(void)
+{
+  return strength;
 }
 
 bool Character::isAlive(void)

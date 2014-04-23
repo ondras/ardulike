@@ -9,13 +9,15 @@ class Character : public Entity {
 protected:
   uint8_t hp;
   uint8_t toughness;
+  uint8_t strength;
   uint32_t exp;
   uint8_t character_level;
 
   void die(void);
 public:
-  Character(uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness, char _representation, uint8_t _properties);
+  Character(uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness, uint8_t _strength, char _representation, uint8_t _properties);
   uint8_t getToughness(void);
+  uint8_t getStrength(void);
   uint8_t getHp(void);
   void damage(uint8_t damage);
   bool  isAlive(void);
