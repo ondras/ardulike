@@ -12,7 +12,7 @@
 MsgQueue q = MsgQueue(9);
 World w = World();
 
-Player   player    = Player(0, 0, 10, 3, 2);
+Player   player    = Player(0, 0, 10, 3, 3);
 
 Npc ogre     = Npc(0, 2, 5, 2, 2, CHAR_OGRE);
 Npc orc      = Npc(1, 10, 3, 1, 2, CHAR_ORC);
