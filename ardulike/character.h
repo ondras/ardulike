@@ -10,7 +10,9 @@ protected:
   uint8_t hp, max_hp;
   uint8_t toughness;
   uint8_t strength;
+
   uint32_t exp;
+  uint32_t next_level_exp;
   uint8_t character_level;
 
   void die(void);

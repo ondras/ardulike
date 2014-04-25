@@ -1,7 +1,7 @@
 #include "character.h"
 
 Character::Character(uint8_t _level, uint8_t _position, uint8_t _max_hp, uint8_t _toughness, uint8_t _strength, char _representation, uint8_t _properties):
-Entity(_level, _position, _representation, _properties), hp(_max_hp), max_hp(_max_hp), toughness(_toughness), strength(_strength), exp(0), character_level(1)
+Entity(_level, _position, _representation, _properties), hp(_max_hp), max_hp(_max_hp), toughness(_toughness), strength(_strength), exp(0), next_level_exp(100), character_level(1)
 {
 }
 
@@ -55,25 +55,23 @@ void Character::die(void)
 
 void Character::levelUp(void)
 {
-  level++;
+  character_level++;
+
   toughness *= LEVELUP_TOUGHNESS_MULTIPLIER;
   strength  *= LEVELUP_STRENGTH_MULTIPLIER;
   max_hp    *= LEVELUP_HP_MULTIPLIER;
-  if (LEVELUP_HEAL) { hp = max_hp; }
-}
+  next_level_exp *= EXP_LEVEL_MULTIPLIER;
 
-uint32_t Character::nextLevelExperience(void)
-{
-  return 100 * pow(EXP_LEVEL_EXPONENT, level);
+  if (LEVELUP_HEAL) { hp = max_hp; }
 }
 
 void Character::gainExperience(Character * other)
 {
-  uint16_t d_exp = (other->getToughness() * EXP_KILL_MULTIPLIER);
+  uint32_t d_exp = (other->getToughness() * EXP_KILL_MULTIPLIER);
   uint32_t required = 0;
 
   do {
-    required = nextLevelExperience() - exp;
+    required = next_level_exp - exp;
     if (d_exp >= required) {
       levelUp();
       exp   += required;
