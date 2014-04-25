@@ -7,6 +7,12 @@ Character(_level, _position, _hp, _toughness, _strength, CHAR_PLAYER, ENTITY_ALI
   display_depth = DISPLAY_DEPTH_PLAYER;
 }
 
+void Player::levelUp(void)
+{
+  say("Level up!");
+  Character::levelUp();
+}
+
 bool Player::onInput(uint8_t input, World * w)
 {
   Npc * npc;
