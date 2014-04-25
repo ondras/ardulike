@@ -15,7 +15,7 @@ void Screen::render(World * w, MsgQueue * q)
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("L:");
-  lcd.print(player->getLevel());
+  lcd.print(player->getCharacterLevel());
   lcd.print("H:");
   lcd.print(player->getHp());
   lcd.print(q->getView());

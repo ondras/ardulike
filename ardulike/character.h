@@ -16,7 +16,7 @@ protected:
   uint8_t character_level;
 
   void die(void);
-  uint32_t nextLevelExperience(void);
+  uint32_t experienceGained(Character * other);
   void levelUp(void);
 public:
   Character(uint8_t _level, uint8_t _position, uint8_t _max_hp, uint8_t _toughness, uint8_t _strength, char _representation, uint8_t _properties);
@@ -24,6 +24,7 @@ public:
   uint8_t getStrength(void);
   uint8_t getHp(void);
   uint8_t getMaxHp(void);
+  uint8_t getCharacterLevel(void);
   void damage(uint8_t damage);
   bool  isAlive(void);
   bool attack(Character * other);

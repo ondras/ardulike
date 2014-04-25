@@ -5,6 +5,11 @@ Entity(_level, _position, _representation, _properties), hp(_max_hp), max_hp(_ma
 {
 }
 
+uint8_t Character::getCharacterLevel(void)
+{
+  return character_level;
+}
+
 void Character::say(const char * message)
 {
   output->addMessage(message);
@@ -65,10 +70,15 @@ void Character::levelUp(void)
   if (LEVELUP_HEAL) { hp = max_hp; }
 }
 
+uint32_t Character::experienceGained(Character * other)
+{
+  return (other->getToughness() * EXP_KILL_MULTIPLIER);
+}
+
 void Character::gainExperience(Character * other)
 {
-  uint32_t d_exp = (other->getToughness() * EXP_KILL_MULTIPLIER);
   uint32_t required = 0;
+  uint32_t d_exp    = experienceGained(other);
 
   do {
     required = next_level_exp - exp;
