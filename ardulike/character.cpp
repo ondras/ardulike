@@ -1,4 +1,7 @@
 #include "character.h"
+#include <stdarg.h>
+#include <string.h>
+#include <stdio.h>
 
 Character::Character(uint8_t _level, uint8_t _position, uint8_t _max_hp, uint8_t _toughness, uint8_t _strength, char _representation, uint8_t _properties):
 Entity(_level, _position, _representation, _properties), hp(_max_hp), max_hp(_max_hp), toughness(_toughness), strength(_strength), exp(0), next_level_exp(100), character_level(1)
@@ -10,9 +13,12 @@ uint8_t Character::getCharacterLevel(void)
   return character_level;
 }
 
-void Character::say(const char * message)
+void Character::say(const char * msg, ...)
 {
-  output->addMessage(message);
+  va_list args;
+  va_start(args, msg);
+  output->addMessage(msg, args);
+  va_end(args);
 }
 
 uint8_t Character::getToughness(void)

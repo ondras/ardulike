@@ -1,4 +1,6 @@
 #include <Arduino.h>
+#include <string.h>
+#include <stdio.h>
 #include "msgqueue.h"
 
 MsgQueue::MsgQueue(uint8_t _display_width):
@@ -19,13 +21,13 @@ void MsgQueue::dropMessage(void)
   message_pos = 0;
 }
 
-bool MsgQueue::addMessage(const char * msg)
+bool MsgQueue::addMessage(const char * msg, va_list args)
 {
   if (message_count == MSGQUEUE_MAX_MESSAGES) { return false; }
   if (strlen(msg) >= MSGQUEUE_MAX_MESSAGE_LEN) { return false; }
 
-  strncpy(messages[message_count], msg, MSGQUEUE_MAX_MESSAGE_LEN);
-  messages[message_count][MSGQUEUE_MAX_MESSAGE_LEN] = '\0';
+  memset(messages[message_count], 0, MSGQUEUE_MAX_MESSAGE_LEN);
+  vsnprintf(messages[message_count], MSGQUEUE_MAX_MESSAGE_LEN, msg, args);
 
   message_count++;
   queue_processing = true;
@@ -45,7 +47,7 @@ char * MsgQueue::getView(void)
   } else {
     message_size = strlen(messages[0]);
 
-    snprintf(view, display_width + 1, "%s", &(messages[0][message_pos]));
+    strncpy(view, &(messages[0][message_pos]), display_width);
     view[display_width] = '\0';
 
     message_pos += display_width;

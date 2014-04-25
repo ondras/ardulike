@@ -2,6 +2,7 @@
 #define __ARDULIKE_MSGQUEUE_H__
 
 #include <inttypes.h>
+#include <stdarg.h>
 #include "constants.h"
 
 #define MSGQUEUE_MAX_MESSAGES      4
@@ -23,7 +24,7 @@ class MsgQueue {
     void dropMessage(void);
   public:
     MsgQueue(uint8_t _display_width);
-    bool   addMessage(const char * msg);
+    bool   addMessage(const char * msg, va_list args);
     bool   viewChanged(void);
     char * getView(void);
 };

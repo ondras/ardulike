@@ -29,7 +29,7 @@ public:
   bool  isAlive(void);
   bool attack(Character * other);
   void gainExperience(Character * other);
-  void say(const char * message);
+  void say(const char * message, ...);
 
   virtual bool onInput(uint8_t input, World * w);
 };
