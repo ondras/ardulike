@@ -39,7 +39,7 @@ bool Player::onInput(uint8_t input, World * w)
     if (attack(npc)) {
       if (!npc->isAlive()) {
         say("You kill the creature.");
-        say("+%d XP gained.", experienceGained(npc));
+        say("You gain %d XP.", experienceGained(npc));
         gainExperience(npc);
       } else {
         say("You hit.");
