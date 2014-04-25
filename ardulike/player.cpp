@@ -18,6 +18,7 @@ bool Player::onInput(uint8_t input, World * w)
   Npc * npc;
   uint8_t new_position = position;
 
+  if (!isAlive()) { return false; }
   if (input != BUTTON_RIGHT && input != BUTTON_LEFT) { return false; }
 
   if (input == BUTTON_LEFT) {
