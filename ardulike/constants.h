@@ -36,4 +36,12 @@
 #define CHAR_ORC         'o'
 #define CHAR_DOG         'd'
 
+/* rules */
+#define EXP_KILL_MULTIPLIER 80
+#define EXP_LEVEL_EXPONENT  2.3
+#define LEVELUP_HP_MULTIPLIER         1.2
+#define LEVELUP_STRENGTH_MULTIPLIER   1.1
+#define LEVELUP_TOUGHNESS_MULTIPLIER  1.5
+#define LEVELUP_HEAL                  true
+
 #endif
