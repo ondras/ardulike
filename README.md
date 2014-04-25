@@ -2,5 +2,5 @@
 
 ## TODO
 
-1. Add experience / levels
-2. Generate monsters
+1. Generate monsters
+2. First round of memory optimizations
