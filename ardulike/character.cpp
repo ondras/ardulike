@@ -111,6 +111,16 @@ bool Character::attack(Character * other)
   }
 }
 
+uint32_t Character::getExperience(void)
+{
+  return exp;
+}
+
+uint32_t Character::getNextLevelExperience(void)
+{
+  return next_level_exp;
+}
+
 bool Character::onInput(uint8_t input, World * w)
 {
   return false;

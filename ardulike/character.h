@@ -17,13 +17,15 @@ protected:
 
   void die(void);
   uint32_t experienceGained(Character * other);
-  void levelUp(void);
+  virtual void levelUp(void);
 public:
   Character(uint8_t _level, uint8_t _position, uint8_t _max_hp, uint8_t _toughness, uint8_t _strength, char _representation, uint8_t _properties);
   uint8_t getToughness(void);
   uint8_t getStrength(void);
   uint8_t getHp(void);
   uint8_t getMaxHp(void);
+  uint32_t getExperience(void);
+  uint32_t getNextLevelExperience(void);
   uint8_t getCharacterLevel(void);
   void damage(uint8_t damage);
   bool  isAlive(void);
