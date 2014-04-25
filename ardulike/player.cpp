@@ -9,8 +9,8 @@ Character(_level, _position, _hp, _toughness, _strength, CHAR_PLAYER, ENTITY_ALI
 
 void Player::levelUp(void)
 {
-  say("Level up!");
   Character::levelUp();
+  say("You level up!");
 }
 
 bool Player::onInput(uint8_t input, World * w)
@@ -38,13 +38,14 @@ bool Player::onInput(uint8_t input, World * w)
   if (npc && npc->isAlive() && npc->isHostile()) {
     if (attack(npc)) {
       if (!npc->isAlive()) {
-        gainExperience(npc);
         say("You kill the creature.");
+        say("+%d XP gained.", experienceGained(npc));
+        gainExperience(npc);
       } else {
         say("You hit.");
       }
     } else {
-      say("You missed.");
+      say("You miss.");
     }
     return true;
   }

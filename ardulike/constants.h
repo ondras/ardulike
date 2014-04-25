@@ -37,7 +37,7 @@
 #define CHAR_DOG         'd'
 
 /* rules */
-#define EXP_KILL_MULTIPLIER 80
+#define EXP_KILL_MULTIPLIER             8
 #define EXP_LEVEL_MULTIPLIER          2.3
 #define LEVELUP_HP_MULTIPLIER         1.2
 #define LEVELUP_STRENGTH_MULTIPLIER   1.1

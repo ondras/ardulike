@@ -38,10 +38,10 @@ bool Npc::onInput(uint8_t input, World * w)
       if (!p->isAlive()) {
         say("You die.");
       } else {
-        say("The creature hits you.");
+        say("Creature hits.");
       }
     } else {
-      say("The creature misses you.");
+      say("Creature misses.");
     }
     return true;
   }
