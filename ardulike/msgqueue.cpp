@@ -8,6 +8,11 @@ MsgQueue::MsgQueue(uint8_t _display_width):
 {
 }
 
+void MsgQueue::setDisplayWidth(uint8_t _display_width)
+{
+  display_width = min(_display_width, SCREEN_COLS);
+}
+
 void MsgQueue::clear(void)
 {
   memset(messages, 0, MSGQUEUE_MAX_MESSAGE_LEN * MSGQUEUE_MAX_MESSAGES);

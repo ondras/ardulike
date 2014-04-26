@@ -28,6 +28,7 @@ class MsgQueue {
     bool   viewChanged(void);
     char * getView(void);
     void   clear(void);
+    void   setDisplayWidth(uint8_t _display_width);
 };
 
 #endif
