@@ -8,6 +8,14 @@ MsgQueue::MsgQueue(uint8_t _display_width):
 {
 }
 
+void MsgQueue::clear(void)
+{
+  memset(messages, 0, MSGQUEUE_MAX_MESSAGE_LEN * MSGQUEUE_MAX_MESSAGES);
+  message_count = 0;
+  message_pos   = 0;
+  queue_processing = false;
+}
+
 void MsgQueue::dropMessage(void)
 {
   for (uint8_t i = 0; i < MSGQUEUE_MAX_MESSAGES - 1; i++) {

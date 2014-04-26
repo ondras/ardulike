@@ -92,6 +92,8 @@ void World::onInput(uint8_t input)
   if (input == BUTTON_NONE) { return; }
   if (input != BUTTON_SELECT) { turns++; }
 
+  output->clear();
+
   for (uint8_t i = 0; i < entity_count; i++) {
     changed |= entities[i]->onInput(input, this);
   }
