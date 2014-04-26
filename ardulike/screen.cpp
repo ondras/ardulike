@@ -23,6 +23,7 @@ uint8_t Screen::bar(uint32_t val, uint32_t max)
     case 2: return 4;
     case 3: return 3;
     case 4: return B11111111;
+    default: return B11111111;
   };
 }
 

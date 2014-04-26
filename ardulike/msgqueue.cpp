@@ -35,7 +35,7 @@ bool MsgQueue::addMessage(const char * msg, va_list args)
   if (strlen(msg) >= MSGQUEUE_MAX_MESSAGE_LEN) { return false; }
 
   memset(messages[message_count], 0, MSGQUEUE_MAX_MESSAGE_LEN);
-  vsnprintf(messages[message_count], MSGQUEUE_MAX_MESSAGE_LEN, msg, args);
+  vsnprintf_P(messages[message_count], MSGQUEUE_MAX_MESSAGE_LEN, msg, args);
 
   message_count++;
   queue_processing = true;

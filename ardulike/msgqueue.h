@@ -5,7 +5,7 @@
 #include <stdarg.h>
 #include "constants.h"
 
-#define MSGQUEUE_MAX_MESSAGES      4
+#define MSGQUEUE_MAX_MESSAGES      3
 #define MSGQUEUE_MAX_MESSAGE_LEN  31
 #define MSGQUEUE_ROTATE_TIME_MS 1500
 
