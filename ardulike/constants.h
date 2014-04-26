@@ -43,5 +43,6 @@
 #define LEVELUP_STRENGTH_MULTIPLIER   1.1
 #define LEVELUP_TOUGHNESS_MULTIPLIER  1.5
 #define LEVELUP_HEAL                  true
+#define LEVEL_SKILL_MULTIPLIER         16
 
 #endif

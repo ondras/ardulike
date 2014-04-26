@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+def nrand(max)
+  acc = 0
+  n   = 128
+  (0..n).each { acc += rand(max) }
+  acc / n
+end
+
+1000.times { puts nrand(128); }

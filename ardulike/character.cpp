@@ -2,6 +2,7 @@
 #include <stdarg.h>
 #include <string.h>
 #include <stdio.h>
+#include "utils.h"
 
 Character::Character(uint8_t _level, uint8_t _position, uint8_t _max_hp, uint8_t _toughness, uint8_t _strength, char _representation, uint8_t _properties):
 Entity(_level, _position, _representation, _properties), hp(_max_hp), max_hp(_max_hp), toughness(_toughness), strength(_strength), exp(0), next_level_exp(100), character_level(1)
@@ -101,7 +102,9 @@ void Character::gainExperience(Character * other)
 
 bool Character::attack(Character * other)
 {
-  int16_t dmg = (strength + random(strength)) - (other->getToughness() + random(other->getToughness()));
+  int16_t dmg =
+       (nrand(2 * strength, character_level * LEVEL_SKILL_MULTIPLIER)
+     - (nrand(2 * other->getToughness(), other->getCharacterLevel() * LEVEL_SKILL_MULTIPLIER)));
 
   if (dmg > 0) {
     other->damage(dmg);
