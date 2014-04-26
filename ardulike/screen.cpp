@@ -4,6 +4,7 @@
 Screen::Screen():
   lcd(8, 9, 4, 5, 6, 7)
 {
+  lcd.begin(SCREEN_COLS, SCREEN_ROWS);
   lcd.createChar(0, sword);
   lcd.createChar(1, shield);
   lcd.createChar(2, heart);
@@ -11,7 +12,6 @@ Screen::Screen():
   lcd.createChar(4, bar_medium);
   lcd.createChar(5, bar_low);
   lcd.createChar(6, bar_empty);
-  lcd.begin(SCREEN_COLS, SCREEN_ROWS);
 }
 
 uint8_t Screen::bar(uint32_t val, uint32_t max)
