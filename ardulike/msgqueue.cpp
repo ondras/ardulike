@@ -37,7 +37,7 @@ void MsgQueue::dropMessage(void)
 bool MsgQueue::addMessage(const char * msg, va_list args)
 {
   if (message_count == MSGQUEUE_MAX_MESSAGES) { return false; }
-  if (strlen(msg) >= MSGQUEUE_MAX_MESSAGE_LEN) { return false; }
+  if (strlen_P(msg) >= MSGQUEUE_MAX_MESSAGE_LEN) { return false; }
 
   memset(messages[message_count], 0, MSGQUEUE_MAX_MESSAGE_LEN);
   vsnprintf_P(messages[message_count], MSGQUEUE_MAX_MESSAGE_LEN, msg, args);
