@@ -11,7 +11,7 @@
 
 class MsgQueue {
   private:
-    uint16_t displayed_at;
+    uint32_t displayed_at;
     uint8_t  display_width;
     uint8_t  message_count;
 
