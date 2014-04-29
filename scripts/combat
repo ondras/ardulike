@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+
+require 'ostruct'
+require 'json'
+
+require './config'
+require './helpers'
+require './entities'
+require './algorithms'
+
+player = Player.new(
+  Conditions.starting_toughness,
+  Conditions.starting_hp,
+  Conditions.starting_hp,
+  Conditions.starting_exp,
+  Conditions.starting_exp_next,
+  Conditions.starting_level,
+  0, 0, 0, nil)
+
+Rules.opponent_toughness_ratio = ARGV[0] ? ARGV[0].to_f : 0.8
+Rules.opponent_hp_ratio        = ARGV[1] ? ARGV[1].to_f : 0.8
+
+opponent = generate_opponent(player, Rules)
+combats  = 1e3
+combat   = 1
+
+while combat <= combats
+  combat(player, opponent)
+
+  if opponent.hp <= 0
+    player.kills += 1
+    player.hp     = player.hp_max
+    opponent.hp   = opponent.hp_max
+
+    combat     += 1
+    next
+  end
+
+  combat(opponent, player)
+
+  if player.hp <= 0
+    player.deaths += 1
+    player.hp   = player.hp_max
+    opponent.hp = opponent.hp_max
+
+    combat     += 1
+    next
+  end
+end
+
+puts "#{Rules.opponent_toughness_ratio} #{Rules.opponent_hp_ratio} #{player.kills/combats.to_f}"
