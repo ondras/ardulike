@@ -14,7 +14,7 @@ World w = World();
 
 Player   player    = Player(0, 0, 10, 3, 3);
 
-Npc ogre     = Npc(0, 2, 5, 1, 3, CHAR_OGRE);
+Npc ogre     = Npc("ogre", 0, 2, 5, 1, 3, CHAR_OGRE);
 
 Stairs stairs_down = Stairs(0, 25, 1, 6);
 Stairs stairs_up   = Stairs(1, 6,  0, 25);

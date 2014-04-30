@@ -38,7 +38,7 @@ bool Player::onInput(uint8_t input, World * w)
   if (npc && npc->isAlive() && npc->isHostile()) {
     if (attack(npc)) {
       if (!npc->isAlive()) {
-        say(PSTR("You kill the creature."));
+        say(PSTR("You kill the %s."), npc->getName());
         say(PSTR("You gain %d XP."), experienceGained(npc));
         gainExperience(npc);
       } else {

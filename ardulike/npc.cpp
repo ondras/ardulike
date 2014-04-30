@@ -1,9 +1,16 @@
 #include "npc.h"
 
-Npc::Npc(uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness, uint8_t _strength, char _representation):
+Npc::Npc(char * _name, uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness, uint8_t _strength, char _representation):
   Character(_level, _position, _hp, _toughness, _strength, _representation, ENTITY_NPC | ENTITY_HOSTILE | ENTITY_ALIVE | ENTITY_BLOCKS_MOVEMENT)
 {
+  strncpy(name, _name, NPC_MAX_NAME_LENGTH);
+  name[NPC_MAX_NAME_LENGTH] = '\0';
   display_depth = DISPLAY_DEPTH_NPCS;
+}
+
+char * Npc::getName(void)
+{
+  return name;
 }
 
 bool Npc::isHostile(void)
@@ -38,10 +45,10 @@ bool Npc::onInput(uint8_t input, World * w)
       if (!p->isAlive()) {
         say(PSTR("You die."));
       } else {
-        say(PSTR("Creature hits."));
+        say(PSTR("The %s hits."), name);
       }
     } else {
-      say(PSTR("Creature misses."));
+      say(PSTR("The %s misses."), name);
     }
     return true;
   }
