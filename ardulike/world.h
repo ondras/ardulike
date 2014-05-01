@@ -12,10 +12,13 @@ class World {
 private:
   MsgQueue  * output;
   Player    * player;
+
   Entity    * entities[64];
   uint8_t  entity_count;
+
   uint8_t  size;
   uint32_t turns;
+
   char view[SCREEN_COLS + 1];
   bool changed;
 public:

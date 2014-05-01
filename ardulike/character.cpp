@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include "utils.h"
 
-Character::Character(uint8_t _level, uint8_t _position, uint8_t _max_hp, uint8_t _toughness, uint8_t _strength, char _representation, uint8_t _properties):
-Entity(_level, _position, _representation, _properties), hp(_max_hp), max_hp(_max_hp), toughness(_toughness), strength(_strength), exp(0), next_level_exp(100), character_level(1)
+Character::Character(uint8_t _level, uint8_t _position, uint8_t _max_hp, uint8_t _toughness, uint8_t _strength):
+Entity(_level, _position), hp(_max_hp), max_hp(_max_hp), toughness(_toughness), strength(_strength), exp(0), next_level_exp(100), character_level(1)
 {
 }
 
@@ -22,47 +22,15 @@ void Character::say(const char * msg, ...)
   va_end(args);
 }
 
-uint8_t Character::getToughness(void)
-{
-  return toughness;
-}
-
-uint8_t Character::getStrength(void)
-{
-  return strength;
-}
-
-bool Character::isAlive(void)
-{
-  return properties & ENTITY_ALIVE;
-}
-
 void Character::damage(uint8_t dmg)
 {
   if (isAlive()) {
-    if (hp <= dmg) {
-      die();
-    } else {
+    if (hp > dmg) {
       hp -= dmg;
+    } else {
+      hp = 0;
     }
   }
-}
-
-uint8_t Character::getHp(void)
-{
-  return hp;
-}
-
-uint8_t Character::getMaxHp(void)
-{
-  return max_hp;
-}
-
-void Character::die(void)
-{
-  hp             = 0;
-  properties    &= ~(ENTITY_ALIVE | ENTITY_BLOCKS_MOVEMENT);
-  representation = '%';
 }
 
 void Character::levelUp(void)
