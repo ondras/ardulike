@@ -12,6 +12,7 @@ class Npc : public Character {
     Npc(char * _name, uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness, uint8_t _strength, char _representation);
     char * getName(void);
     bool isHostile(void);
+    uint32_t getExperienceBonus(void);
     virtual bool onInput(uint8_t input, World * w);
 };
 

@@ -3,5 +3,5 @@
 
 #include <inttypes.h>
 
-uint8_t nrand(uint8_t max, uint8_t trials);
+uint8_t nrand(uint8_t max);
 #endif

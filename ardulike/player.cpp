@@ -2,10 +2,64 @@
 #include "npc.h"
 
 Player::Player(uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness, uint8_t _strength):
-Character(_level, _position, _hp, _toughness, _strength, CHAR_PLAYER, ENTITY_ALIVE | ENTITY_BLOCKS_MOVEMENT)
+Character(_level, _position, _hp, _toughness, _strength)
 {
   display_depth = DISPLAY_DEPTH_PLAYER;
 }
+
+uint8_t Player::getCharacterLevel(void)
+{
+  return character_level;
+}
+
+uint32_t Player::getExperience(void)
+{
+  return exp;
+}
+
+uint32_t Player::getNextLevelExperience(void)
+{
+  return next_level_exp;
+}
+
+
+uint32_t Player::experienceGained(Character * other)
+{
+  return (other->getToughness() * EXP_KILL_MULTIPLIER);
+}
+
+
+void Player::gainExperience(Character * other)
+{
+  uint32_t required = 0;
+  uint32_t d_exp    = experienceGained(other);
+
+  do {
+    required = next_level_exp - exp;
+    if (d_exp >= required) {
+      levelUp();
+      exp   += required;
+      d_exp -= required;
+    } else {
+      exp   += d_exp;
+      d_exp  = 0;
+    }
+  } while (d_exp > 0);
+}
+
+
+void Player::levelUp(void)
+{
+  character_level++;
+
+  toughness *= LEVELUP_TOUGHNESS_MULTIPLIER;
+  strength  *= LEVELUP_STRENGTH_MULTIPLIER;
+  max_hp    *= LEVELUP_HP_MULTIPLIER;
+  next_level_exp *= EXP_LEVEL_MULTIPLIER;
+
+  if (LEVELUP_HEAL) { hp = max_hp; }
+}
+
 
 void Player::levelUp(void)
 {

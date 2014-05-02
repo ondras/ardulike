@@ -1,7 +1,7 @@
 #include "npc.h"
 
-Npc::Npc(char * _name, uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness, uint8_t _strength, char _representation):
-  Character(_level, _position, _hp, _toughness, _strength, _representation, ENTITY_NPC | ENTITY_HOSTILE | ENTITY_ALIVE | ENTITY_BLOCKS_MOVEMENT)
+Npc::Npc(char * _name, uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness, uint8_t _strength):
+  Character(_level, _position, _hp, _toughness, _strength)
 {
   strncpy(name, _name, NPC_MAX_NAME_LENGTH);
   name[NPC_MAX_NAME_LENGTH] = '\0';
