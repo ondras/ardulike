@@ -3,6 +3,7 @@
 
 #include "constants.h"
 #include "msgqueue.h"
+#include "terrain.h"
 
 class Player;
 class Entity;
@@ -13,10 +14,12 @@ private:
   MsgQueue  * output;
   Player    * player;
 
-  Entity    * entities[64];
-  uint8_t  entity_count;
+  Terrain   * terrain[64];
+  Npc       * npcs[64];
 
-  uint8_t  size;
+  uint8_t  terrain_count;
+  uint8_t  npc_count;
+
   uint32_t turns;
 
   char view[SCREEN_COLS + 1];
@@ -24,26 +27,28 @@ private:
 public:
   World(void);
 
-  void    setOutput(MsgQueue * q);
-  void    init(void);
+  bool    hasChanged(void) { return changed; };
+  uint8_t getSize(void) { return WORLD_SIZE; };
 
-  void     addPlayer(Player * _player);
-  Player * getPlayer(void);
+  uint32_t getTurns(void) { return turns; };
+  void     turn(void) { turns++; };
 
-  bool isPassable(uint8_t level, uint8_t position);
+  void     setOutput(MsgQueue * _output) { output = _output; };
 
-  Npc * findNpc(uint8_t level, uint8_t position);
-  Entity * findEntity(uint8_t level, uint8_t position, uint8_t properties);
+  void     addPlayer(Player * _player) { player = _player; };
+  Player * getPlayer(void) { return player; };
 
-  void    addEntity(Entity * entity);
-  void    addEntities(int count, ...);
+  bool  isPassable(uint8_t level, uint8_t position);
+  Npc * getNpc(uint8_t level, uint8_t position);
+
+  void    addTerrain(Terrain * _terrain);
+  void    addTerrains(uint8_t count, ...);
+
+  void    addNpc(Npc * _npc);
+  void    addNpcs(uint8_t count, ...);
 
   char *  getView(void);
-  uint8_t getSize(void);
-  uint8_t getEntityCount(void);
-  uint32_t getTurns(void);
 
-  bool    hasChanged(void);
   void    onInput(uint8_t input);
 };
 

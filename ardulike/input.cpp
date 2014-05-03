@@ -1,3 +1,5 @@
+#include <Arduino.h>
+#include "constants.h"
 #include "input.h"
 
 #define RIGHT_10BIT_ADC  0

@@ -1,6 +1,7 @@
 #include <avr/pgmspace.h>
 #include <avr/io.h>
 #include <stdarg.h>
+#include <string.h>
 #include <stdio.h>
 
 #include "world.h"
@@ -9,80 +10,76 @@
 #include "npc.h"
 
 World::World(void):
-  entity_count(0), size(128), turns(0), changed(true)
+  terrain_count(0), npc_count(0), turns(0), changed(true)
 {
 }
 
-uint32_t World::getTurns(void)
-{
-  return turns;
-}
-
-void World::addEntity(Entity * entity)
-{
-  entities[entity_count++] = entity;
-}
-
-void World::addEntities(int count, ...)
+void World::addTerrains(uint8_t count, ...)
 {
   va_list arguments;
   va_start(arguments, count);
 
   for (uint8_t i = 0; i < count; i++) {
-    addEntity(va_arg(arguments, Entity *));
+    addTerrain(va_arg(arguments, Terrain *));
   }
 
   va_end(arguments);
 }
 
-uint8_t World::getSize(void)
+void World::addTerrain(Terrain * _terrain)
 {
-  return size;
+  terrain[terrain_count++] = _terrain;
+}
+
+void World::addNpc(Npc * _npc)
+{
+  _npc->setOutput(output);
+  npcs[npc_count++] = _npc;
+}
+
+void World::addNpcs(uint8_t count, ...)
+{
+  va_list arguments;
+  va_start(arguments, count);
+
+  for (uint8_t i = 0; i < count; i++) {
+    addNpc(va_arg(arguments, Npc *));
+  }
+
+  va_end(arguments);
 }
 
 char * World::getView(void)
 {
-  Entity * e;
+  Terrain * t;
+  Npc     * n;
 
   uint8_t from  = (player->getPosition() / SCREEN_COLS) * SCREEN_COLS;
   uint8_t to    = (player->getPosition() / SCREEN_COLS + 1) * SCREEN_COLS;
   uint8_t level = player->getLevel();
-  uint8_t pos, lvl;
 
   memset(view, CHAR_FLOOR, SCREEN_COLS);
 
-  for (uint8_t depth = 0; depth < SCREEN_DEPTH; depth++) {
-    for (uint8_t i = 0; i < entity_count; i++) {
-      e = entities[i];
+  for (uint8_t i = 0; i < terrain_count; i++) {
+    t = terrain[i];
 
-      if (e->getDisplayDepth() != depth) { continue; }
-
-      lvl   = e->getLevel();
-      pos   = e->getPosition();
-
-      if (lvl != level || pos < from || pos >= to) { continue; }
-
-      view[pos % SCREEN_COLS] = e->getRepresentation();
+    if (t->inView(level, from, to)) {
+      view[t->getPosition() % SCREEN_COLS] = t->getRepresentation();
     }
   }
 
+  for (uint8_t i = 0; i < npc_count; i++) {
+    n = npcs[i];
+
+    if (n->inView(level, from, to)) {
+      view[n->getPosition() % SCREEN_COLS] = n->getRepresentation();
+    }
+  }
+
+  view[player->getPosition() % SCREEN_COLS] = player->getRepresentation();
   view[SCREEN_COLS] = '\0';
+
   return view;
-}
-
-uint8_t World::getEntityCount(void)
-{
-  return entity_count;
-}
-
-void World::addPlayer(Player * _player)
-{
-  player = _player;
-}
-
-Player * World::getPlayer(void)
-{
-  return player;
 }
 
 void World::onInput(uint8_t input)
@@ -94,14 +91,13 @@ void World::onInput(uint8_t input)
 
   output->clear();
 
-  for (uint8_t i = 0; i < entity_count; i++) {
-    changed |= entities[i]->onInput(input, this);
+  for (uint8_t i = 0; i < npc_count; i++) {
+    changed |= npcs[i]->onInput(input, this);
   }
-}
 
-bool World::hasChanged(void)
-{
-  return changed;
+  for (uint8_t i = 0; i < terrain_count; i++) {
+    changed |= terrain[i]->onInput(input, this);
+  }
 }
 
 bool World::isPassable(uint8_t level, uint8_t position)
@@ -109,38 +105,20 @@ bool World::isPassable(uint8_t level, uint8_t position)
   if (position < 0 || position >= getSize()) {
     return false;
   } else {
-    return findEntity(level, position, ENTITY_BLOCKS_MOVEMENT) == NULL;
-  }
-}
-
-Npc * World::findNpc(uint8_t level, uint8_t position)
-{
-  return (Npc *) findEntity(level, position, ENTITY_NPC);
-}
-
-Entity * World::findEntity(uint8_t level, uint8_t position, uint8_t properties)
-{
-  Entity * e;
-
-  for (uint8_t i = 0; i < entity_count; i++) {
-    e = entities[i];
-
-    if (e->getLevel() == level && e->getPosition() == position && (e->getProperties() & properties)) {
-      return e;
+    for (uint8_t i = 0; i < npc_count; i++) {
+      if (npcs[i]->blocksAt(level, position)) { return false; }
     }
+    for (uint8_t i = 0; i < terrain_count; i++) {
+      if (terrain[i]->blocksAt(level, position)) { return false; }
+    }
+    return true;
   }
+}
 
+Npc * World::getNpc(uint8_t level, uint8_t position)
+{
+  for (uint8_t i = 0; i < npc_count; i++) {
+    if (npcs[i]->at(level, position)) { return npcs[i]; }
+  }
   return NULL;
-}
-
-void World::setOutput(MsgQueue * q)
-{
-  output = q;
-}
-
-void World::init(void)
-{
-  for (uint8_t i = 0; i < entity_count; i++) {
-    entities[i]->setOutput(output);
-  }
 }

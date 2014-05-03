@@ -1,21 +1,16 @@
+#include <avr/pgmspace.h>
+#include <stdlib.h>
+
+#include "player.h"
 #include "npc.h"
+#include "world.h"
 
-Npc::Npc(char * _name, uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness, uint8_t _strength):
-  Character(_level, _position, _hp, _toughness, _strength)
+Npc::Npc(uint8_t _level, uint8_t _position):
+  Character(_level, _position, PLAYER_STARTING_HP), hostile(true)
 {
-  strncpy(name, _name, NPC_MAX_NAME_LENGTH);
-  name[NPC_MAX_NAME_LENGTH] = '\0';
-  display_depth = DISPLAY_DEPTH_NPCS;
-}
-
-char * Npc::getName(void)
-{
-  return name;
-}
-
-bool Npc::isHostile(void)
-{
-  return properties & ENTITY_HOSTILE;
+  strength  = PLAYER_STARTING_STRENGTH;
+  toughness = PLAYER_STARTING_TOUGHNESS;
+  max_hp    = PLAYER_STARTING_HP;
 }
 
 bool Npc::onInput(uint8_t input, World * w)

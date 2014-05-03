@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <string.h>
 #include <stdio.h>
+
 #include "msgqueue.h"
 
 MsgQueue::MsgQueue(uint8_t _display_width):

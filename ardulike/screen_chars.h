@@ -1,6 +1,9 @@
 #ifndef __ARDULIKE_SCREEN_CHARS_H__
 #define __ARDULIKE_SCREEN_CHARS_H__
 
+/* FIXME: find out what defines byte */
+#include <Arduino.h>
+
 byte sword[8] = {
   B00000,
   B00001,

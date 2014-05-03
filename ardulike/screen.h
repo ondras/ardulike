@@ -4,10 +4,9 @@
 #include <LiquidCrystal.h>
 
 #include "constants.h"
-#include "player.h"
-#include "world.h"
-#include "stairs.h"
-#include "msgqueue.h"
+
+class World;
+class MsgQueue;
 
 class Screen {
 private:

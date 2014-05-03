@@ -1,9 +1,10 @@
 #ifndef __ARDULIKE_CHARACTER_H__
 #define __ARDULIKE_CHARACTER_H__
 
-#include <Arduino.h>
+#include "constants.h"
 #include "entity.h"
-#include "world.h"
+
+class World;
 
 class Character : public Entity {
 protected:
@@ -17,10 +18,11 @@ public:
 
   bool isAlive(void) { return hp > 0; };
 
-  virtual uint8_t getToughness(void);
-  virtual uint8_t getStrength(void);
-  virtual uint8_t getHp(void);
-  virtual uint8_t getMaxHp(void);
+  virtual uint8_t getToughness(void) { return 0; };
+  virtual uint8_t getStrength(void) { return 0; };
+  virtual uint8_t getMaxHp(void) { return 0; };
+
+  virtual uint8_t getHp(void) { return hp; };
 
   virtual bool blocksMovement(void)  { return isAlive(); };
   virtual char getRepresentation(void) { return CHAR_SPACE; };

@@ -3,6 +3,7 @@
 
 #include <inttypes.h>
 #include <stdarg.h>
+
 #include "constants.h"
 
 #define MSGQUEUE_MAX_MESSAGES      3

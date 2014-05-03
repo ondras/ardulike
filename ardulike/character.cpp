@@ -1,7 +1,9 @@
-#include "character.h"
 #include <stdarg.h>
 #include <string.h>
 #include <stdio.h>
+
+#include "character.h"
+#include "msgqueue.h"
 #include "utils.h"
 
 Character::Character(uint8_t _level, uint8_t _position, uint8_t _hp):

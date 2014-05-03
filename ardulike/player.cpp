@@ -1,38 +1,21 @@
+#include <avr/pgmspace.h>
+
 #include "player.h"
 #include "npc.h"
+#include "world.h"
 
-Player::Player(uint8_t _level, uint8_t _position, uint8_t _hp, uint8_t _toughness, uint8_t _strength):
-Character(_level, _position, _hp, _toughness, _strength)
+Player::Player(uint8_t _level, uint8_t _position):
+Character(_level, _position, PLAYER_STARTING_HP), exp(0), next_level_exp(100), character_level(1)
 {
-  display_depth = DISPLAY_DEPTH_PLAYER;
+  strength  = PLAYER_STARTING_STRENGTH;
+  toughness = PLAYER_STARTING_TOUGHNESS;
+  max_hp    = PLAYER_STARTING_HP;
 }
 
-uint8_t Player::getCharacterLevel(void)
-{
-  return character_level;
-}
-
-uint32_t Player::getExperience(void)
-{
-  return exp;
-}
-
-uint32_t Player::getNextLevelExperience(void)
-{
-  return next_level_exp;
-}
-
-
-uint32_t Player::experienceGained(Character * other)
-{
-  return (other->getToughness() * EXP_KILL_MULTIPLIER);
-}
-
-
-void Player::gainExperience(Character * other)
+void Player::gainExperience(Npc * other)
 {
   uint32_t required = 0;
-  uint32_t d_exp    = experienceGained(other);
+  uint32_t d_exp    = other->getExperienceBonus();
 
   do {
     required = next_level_exp - exp;
@@ -47,7 +30,6 @@ void Player::gainExperience(Character * other)
   } while (d_exp > 0);
 }
 
-
 void Player::levelUp(void)
 {
   character_level++;
@@ -58,12 +40,6 @@ void Player::levelUp(void)
   next_level_exp *= EXP_LEVEL_MULTIPLIER;
 
   if (LEVELUP_HEAL) { hp = max_hp; }
-}
-
-
-void Player::levelUp(void)
-{
-  Character::levelUp();
   say(PSTR("You level up!"));
 }
 
@@ -88,12 +64,12 @@ bool Player::onInput(uint8_t input, World * w)
     return true;
   }
 
-  npc = w->findNpc(level, new_position);
+  npc = w->getNpc(level, new_position);
   if (npc && npc->isAlive() && npc->isHostile()) {
     if (attack(npc)) {
       if (!npc->isAlive()) {
         say(PSTR("You kill the %s."), npc->getName());
-        say(PSTR("You gain %d XP."), experienceGained(npc));
+        say(PSTR("You gain %d XP."), npc->getExperienceBonus());
         gainExperience(npc);
       } else {
         say(PSTR("You hit."));

@@ -16,13 +16,6 @@
 #define SCREEN_COLS  16
 #define SCREEN_DEPTH  8  // 'z' axis going 'towards the player', i.e 8 is nearest
 
-/* display depths */
-
-#define DISPLAY_DEPTH_PLAYER  3
-#define DISPLAY_DEPTH_NPCS    2
-#define DISPLAY_DEPTH_ITEMS   1
-#define DISPLAY_DEPTH_TERRAIN 0
-
 /* characters */
 
 #define CHAR_SPACE       ' '
@@ -44,5 +37,11 @@
 #define LEVELUP_TOUGHNESS_MULTIPLIER  1.5
 #define LEVELUP_HEAL                  true
 #define LEVEL_SKILL_MULTIPLIER         16
+
+#define PLAYER_STARTING_HP        10
+#define PLAYER_STARTING_STRENGTH  10
+#define PLAYER_STARTING_TOUGHNESS 15
+
+#define WORLD_SIZE 128
 
 #endif

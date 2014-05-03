@@ -1,6 +1,10 @@
 #include "screen.h"
 #include "screen_chars.h"
 
+#include "player.h"
+#include "world.h"
+#include "msgqueue.h"
+
 Screen::Screen():
   lcd(8, 9, 4, 5, 6, 7)
 {
