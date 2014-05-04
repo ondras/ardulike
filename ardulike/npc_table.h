@@ -7,10 +7,17 @@
 
 class NpcDefaults {
   char    representation;
-  uint8_t display_depth;
   char    name[NPC_MAX_NAME_LENGTH + 1];
+  uint8_t toughness;
+  uint8_t strength;
+  uint8_t max_hp;
   public:
-  NpcDefaults(char * _name, char _representation);
+  NpcDefaults(char * _name, char _representation, uint8_t _toughness, uint8_t _strength, uint8_t _max_hp);
+  char * getName(void) { return name; };
+  char getRepresentation(void) { return representation; };
+  uint8_t getToughness(void) { return toughness; };
+  uint8_t getStrength(void) { return strength; };
+  uint8_t getMaxHp(void) { return max_hp; };
 };
 
 class NpcTable {
