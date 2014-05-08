@@ -3,33 +3,27 @@
 
 #include "constants.h"
 #include "character.h"
-
-#define NPC_MAX_NAME_LENGTH 15
+#include "npc_table.h"
 
 class World;
 
 class Npc : public Character {
-    bool hostile;
-
-    uint8_t  toughness;
-    uint8_t  strength;
-    uint8_t  max_hp;
-
-    char name[NPC_MAX_NAME_LENGTH + 1];
+    bool    hostile;
+    uint8_t defaults_index;
   public:
     Npc(uint8_t _level, uint8_t _position);
+    Npc(uint8_t _level, uint8_t _position, char representation);
 
-    char * getName(void) { return name; }
-    uint8_t getStrength(void) { return strength; };
-    uint8_t getToughness(void) { return toughness; };
-    uint8_t getMaxHp(void) { return max_hp; };
+    char * getName(void) { return NpcTable::get(defaults_index)->getName(); }
+    uint8_t getStrength(void) { return NpcTable::get(defaults_index)->getStrength(); };
+    uint8_t getToughness(void) { return NpcTable::get(defaults_index)->getToughness(); };
+    uint8_t getMaxHp(void) { return NpcTable::get(defaults_index)->getMaxHp(); };
+    char getRepresentation(void) { return NpcTable::get(defaults_index)->getRepresentation(); };
 
     uint32_t getExperienceBonus(void) { return getToughness() * EXP_KILL_MULTIPLIER; };
 
     bool isHostile(void) { return hostile; };
     void setHostile(bool _hostile) { hostile = _hostile; };
-
-    char getRepresentation(void) { return CHAR_OGRE; };
 
     virtual bool onInput(uint8_t input, World * w);
 };

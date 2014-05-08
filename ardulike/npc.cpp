@@ -8,9 +8,15 @@
 Npc::Npc(uint8_t _level, uint8_t _position):
   Character(_level, _position, PLAYER_STARTING_HP), hostile(true)
 {
-  strength  = PLAYER_STARTING_STRENGTH;
-  toughness = PLAYER_STARTING_TOUGHNESS;
-  max_hp    = PLAYER_STARTING_HP;
+  defaults_index = NpcTable::randomMonsterIndex();
+  hp             = getMaxHp();
+}
+
+Npc::Npc(uint8_t _level, uint8_t _position, char representation):
+  Character(_level, _position, PLAYER_STARTING_HP), hostile(true)
+{
+  defaults_index = NpcTable::monsterIndex(representation);
+  hp             = getMaxHp();
 }
 
 bool Npc::onInput(uint8_t input, World * w)
@@ -40,10 +46,10 @@ bool Npc::onInput(uint8_t input, World * w)
       if (!p->isAlive()) {
         say(PSTR("You die."));
       } else {
-        say(PSTR("The %s hits."), name);
+        say(PSTR("The %s hits."), getName());
       }
     } else {
-      say(PSTR("The %s misses."), name);
+      say(PSTR("The %s misses."), getName());
     }
     return true;
   }
