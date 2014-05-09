@@ -118,7 +118,7 @@ bool World::isPassable(uint8_t level, uint8_t position)
 Npc * World::getNpc(uint8_t level, uint8_t position)
 {
   for (uint8_t i = 0; i < npc_count; i++) {
-    if (npcs[i]->at(level, position)) { return npcs[i]; }
+    if (npcs[i]->at(level, position) && npcs[i]->isAlive()) { return npcs[i]; }
   }
   return NULL;
 }
