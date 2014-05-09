@@ -31,6 +31,12 @@ void World::addTerrain(Terrain * _terrain)
   terrain[terrain_count++] = _terrain;
 }
 
+void World::addPlayer(Player * _player)
+{
+ _player->setOutput(output);
+ player = _player;
+}
+
 void World::addNpc(Npc * _npc)
 {
   _npc->setOutput(output);
@@ -90,6 +96,8 @@ void World::onInput(uint8_t input)
   if (input != BUTTON_SELECT) { turns++; }
 
   output->clear();
+
+  changed |= player->onInput(input, this);
 
   for (uint8_t i = 0; i < npc_count; i++) {
     changed |= npcs[i]->onInput(input, this);

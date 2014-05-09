@@ -35,7 +35,7 @@ public:
 
   void     setOutput(MsgQueue * _output) { output = _output; };
 
-  void     addPlayer(Player * _player) { player = _player; };
+  void     addPlayer(Player * _player);
   Player * getPlayer(void) { return player; };
 
   bool  isPassable(uint8_t level, uint8_t position);
