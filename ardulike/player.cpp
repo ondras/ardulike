@@ -65,7 +65,7 @@ bool Player::onInput(uint8_t input, World * w)
   }
 
   npc = w->getNpc(level, new_position);
-  if (npc && npc->isAlive() && npc->isHostile()) {
+  if (npc && npc->isHostile()) {
     if (attack(npc)) {
       if (!npc->isAlive()) {
         say(PSTR("You kill the %s."), npc->getName());
