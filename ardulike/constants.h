@@ -28,6 +28,7 @@
 #define CHAR_OGRE        'O'
 #define CHAR_ORC         'o'
 #define CHAR_DOG         'd'
+#define CHAR_CORPSE      '%'
 
 /* rules */
 #define EXP_KILL_MULTIPLIER             8
