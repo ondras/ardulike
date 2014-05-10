@@ -45,5 +45,8 @@ void NpcTable::addNpc(NpcDefaults * defaults)
 NpcTable::NpcTable():
   count(0)
 {
-  addNpc(new NpcDefaults("ogre", CHAR_OGRE, 5, 1, 3));
+  addNpc(new NpcDefaults("ogre",  CHAR_OGRE,  5, 1, 3));
+  addNpc(new NpcDefaults("orc",   CHAR_ORC,   5, 1, 3));
+  addNpc(new NpcDefaults("gnome", CHAR_GNOME, 5, 1, 3));
+  addNpc(new NpcDefaults("rat",   CHAR_RAT,   5, 1, 3));
 }

@@ -28,6 +28,8 @@
 #define CHAR_OGRE        'O'
 #define CHAR_ORC         'o'
 #define CHAR_DOG         'd'
+#define CHAR_GNOME       'g'
+#define CHAR_RAT         'r'
 #define CHAR_CORPSE      '%'
 
 /* rules */
