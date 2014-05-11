@@ -2,8 +2,9 @@
 
 ## TODO
 
-1. Generate monsters
+1. Generating monsters based on player exp/HP.
 2. Add intro / outro.
+3. Story line
 
 
 ## Docs
