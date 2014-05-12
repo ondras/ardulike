@@ -5,15 +5,29 @@
 #include "npc.h"
 #include "world.h"
 
+Npc::Npc(uint8_t _level, uint8_t _position, uint8_t _power):
+  Character(_level, _position, PLAYER_STARTING_HP), hostile(true), power(_power)
+{
+  defaults_index = NpcTable::randomMonsterIndex();
+  hp             = getMaxHp();
+}
+
 Npc::Npc(uint8_t _level, uint8_t _position):
-  Character(_level, _position, PLAYER_STARTING_HP), hostile(true)
+  Character(_level, _position, PLAYER_STARTING_HP), hostile(true), power(100)
 {
   defaults_index = NpcTable::randomMonsterIndex();
   hp             = getMaxHp();
 }
 
 Npc::Npc(uint8_t _level, uint8_t _position, char representation):
-  Character(_level, _position, PLAYER_STARTING_HP), hostile(true)
+  Character(_level, _position, PLAYER_STARTING_HP), hostile(true), power(100)
+{
+  defaults_index = NpcTable::monsterIndex(representation);
+  hp             = getMaxHp();
+}
+
+Npc::Npc(uint8_t _level, uint8_t _position, uint8_t _power, char representation):
+  Character(_level, _position, PLAYER_STARTING_HP), hostile(true), power(_power)
 {
   defaults_index = NpcTable::monsterIndex(representation);
   hp             = getMaxHp();
