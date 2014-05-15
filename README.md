@@ -3,8 +3,9 @@
 ## TODO
 
 1. Generating monsters based on player exp/HP.
-2. Add intro / outro.
-3. Story line
+2. Generating levels
+3. Add intro / outro.
+4. Story line
 
 
 ## Docs
